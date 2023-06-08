@@ -1,3 +1,10 @@
+//getters and setters for experience, inventory, and selectedItem
+//getDamage() returns the damage of the player
+//addToInventory() adds an item to the inventory
+//removeFromInventory() removes an item from the inventory
+//gainExperience() adds experience to the player and levels them up if they have enough experience
+//levelUp() levels up the player
+
 import java.util.ArrayList;
 
 public class Player extends Entity{
@@ -61,7 +68,4 @@ public class Player extends Entity{
         this.setMaxHp(this.getMaxHp() + 10);
         this.setHp(this.getMaxHp());
     }
-
-
-
 }

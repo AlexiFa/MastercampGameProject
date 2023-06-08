@@ -1,3 +1,8 @@
+//getters and setters for hp, maxHp, level, and name
+//attack() attacks an entity
+//heal() heals the entity
+//move() moves the entity on the map
+
 import java.util.Random;
 
 public class Entity {

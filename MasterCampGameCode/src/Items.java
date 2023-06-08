@@ -1,3 +1,5 @@
+//getter and setter for value, name and type
+
 public class Items {
     private int value;
     private String name;

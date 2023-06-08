@@ -1,3 +1,6 @@
+//getter for damage
+//death() returns an item
+
 import java.util.Random;
 
 public class Monster extends Entity{
