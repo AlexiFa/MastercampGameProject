@@ -1,8 +1,7 @@
 import java.util.ArrayList;
 
 public class Player {
-    private int level, experience;
-    private String name;
+    private int experience;
     private ArrayList<Items> inventory;
     private Items selectedItem;
 

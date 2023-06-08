@@ -20,6 +20,8 @@ public class Monster extends Entity{
         return this.drops;
     }
 
+
+
     @Override
     public String toString(){
         return(this.getName() + "\nLife points : " + this.getHp() + "/" + this.getMaxHp());
