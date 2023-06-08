@@ -1,4 +1,4 @@
-import java.util.ArrayList;
+import java.util.Random;
 
 public class Monster extends Entity{
     private int damage;
@@ -13,5 +13,11 @@ public class Monster extends Entity{
     @Override
     public String toString(){
         return(this.getName() + "\nLife points : " + this.getHp() + "/" + this.getMaxHp());
+    }
+    public Items death(){
+        //ajouter une façon de retirer l'entité de la map
+        Random random = new Random();
+        int i = random.nextInt(Main.itemsList.size());
+        return Main.itemsList.get(i);
     }
 }

@@ -28,13 +28,4 @@ public class Items {
     public void setType(boolean type){
         this.type = type;
     }
-
-
-    public void useItem(Player player){
-        if (this.type){
-            player.heal(this.value);
-        } else {
-            player.takeDamage(this.value);
-        }
-    }
 }

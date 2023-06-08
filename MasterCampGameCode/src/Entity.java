@@ -34,10 +34,28 @@ public class Entity {
         this.level = level;
     }
 
-    public void takeDamage(int damage){
-        if (damage > this.hp){
+    public void attack(Entity entity){
+        int damage;
+        if (entity instanceof Player){
+            damage = ((Monster) this).getDamage();
+        } else {
+            damage = ((Player) this).getDamage();
+        }
+        /*if (entity instanceof Monster && this instanceof Monster){
+            damage = 0;
+        }*/
+        if (damage > entity.hp){
             this.hp = 0;
             //ajouter une façon de retirer l'entité de la map
+            if (entity instanceof Monster){
+                Items reward = ((Monster) entity).death();
+                ((Player) this).addToInventory(reward);
+                Random random = new Random();
+                int i = random.nextInt(10*entity.level);
+                ((Player) this).gainExperience(i);
+            }else{
+                //ajouter une façon de terminer le jeu
+            }
         } else {
             this.hp -= damage;
         }

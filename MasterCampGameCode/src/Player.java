@@ -29,6 +29,18 @@ public class Player extends Entity{
         this.selectedItem = selectedItem;
     }
 
+    public int getDamage(){
+        if (this.selectedItem == null){
+            return 1;
+        } else {
+            if (this.selectedItem.getType()){
+                return 1;
+            } else {
+                return this.selectedItem.getValue();
+            }
+        }
+    }
+
     public void addToInventory(Items item){
         this.inventory.add(item);
     }
@@ -49,4 +61,7 @@ public class Player extends Entity{
         this.setMaxHp(this.getMaxHp() + 10);
         this.setHp(this.getMaxHp());
     }
+
+
+
 }
