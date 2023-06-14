@@ -1,17 +1,16 @@
 public class View extends javax.swing.JFrame{
 
     private Map map = new Map();
-
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTextArea jTextArea1;
     public View(){
         initComponents();
         setTitle("Interface Jeu");
         setLocationRelativeTo(null);
-
-        //JTextArea1.setText(map.toString());
+        jTextArea1.setText(map.toString());
     }
 
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTextArea jTextArea1;
+
     private void initComponents(){
 
         //Zone défilement
@@ -24,7 +23,7 @@ public class View extends javax.swing.JFrame{
 
         jTextArea1.setColumns(9);
         jTextArea1.setRows(9);
-        jTextArea1.setFont(new java.awt.Font("Times", 1, 36));
+        jTextArea1.setFont(new java.awt.Font("Courier", 1, 36));
         jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextArea1KeyPressed(evt);

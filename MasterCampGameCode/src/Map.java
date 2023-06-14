@@ -1,20 +1,18 @@
 
-
-
 import java.awt.Point;
 import java.util.Scanner;
 public class Map {
 
         private String room =""
-                + "######\n"
-                + "###  #\n"
-                + "# O  #\n"
-                + "# H  #\n"
-                + "#   O#\n"
-                + "##   #\n"
-                + "######";
+                + "#######\n"
+                + "###   #\n"
+                + "#   O #\n"
+                + "# H   #\n"
+                + "#   O #\n"
+                + "##    #\n"
+                + "#######";
 
-        private char[][][] map = new char[2][6][7];
+        private char[][][] map = new char[2][7][7];
         private Point playerPosition = new Point();
 
         public Map() {
@@ -34,8 +32,8 @@ public class Map {
 
                     //determine le charactère
                     char charactere = line.charAt(x);
-                    map[charactere / 50][x][y] = charactere;
-                    map[1 - charactere / 50][x][y] = ' ';
+                    map[charactere / 70][x][y] = charactere;
+                    map[1 - charactere / 70][x][y] = ' ';
                     //determine la position du joueur
                     if (charactere == 'H') {
                         playerPosition.x = x;
@@ -80,16 +78,11 @@ public class Map {
 
 
 
-            // check si la case voisine contient OR, si oui, remplace par H
-            if ( map[1][playerPosition.x + dx][playerPosition.y + dy] == 'O') {
-                map[1][playerPosition.x][playerPosition.y] = 'H';
-
+            if (map[1][playerPosition.x + dx][playerPosition.y + dy] == 'O' )
+            {
+                map[1][playerPosition.x + dx][playerPosition.y + dy] = ' ';
             }
-
-            // check si la case voisine contient un mur, si oui, ne bouge pas
-            if ( map[1][playerPosition.x + dx][playerPosition.y] != 'O'
-                    && map[0][playerPosition.x + dx][playerPosition.y] != '#') {
-
+            if (map[1][playerPosition.x + dx][playerPosition.y + dy] != '#' && map[0][playerPosition.x + dx][playerPosition.y + dy] != '#') {
                 playerPosition.x += dx;
                 playerPosition.y += dy;
             }
@@ -113,7 +106,14 @@ public class Map {
                     else if ( map[1][x][y] != ' ')
                     {
                         out += map[1][x][y];
-                    } else
+                    }
+                    else if (map[1][x][y] == 'O')
+                    {
+                        out += ' ';
+                        map[1][x][y] = ' ';
+                    }
+
+                    else
                     {
 
                         out += map[0][x][y];
@@ -124,11 +124,6 @@ public class Map {
             }
             return out;
         }
-
-
-
-
-
 
 
 
