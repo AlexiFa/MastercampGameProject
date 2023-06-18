@@ -1,6 +1,10 @@
+import java.awt.*;
+import java.awt.*;
+
 public class View extends javax.swing.JFrame{
 
     private Map map = new Map();
+
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTextArea jTextArea1;
     public View(){
@@ -47,9 +51,13 @@ public class View extends javax.swing.JFrame{
         pack();
     }
 
+
     private void jTextArea1KeyPressed(java.awt.event.KeyEvent evt) {
         map.move(evt.getKeyCode());
         jTextArea1.setText(map.toString());
+
+
+
     }
 
     public static void main(String[] args) {
@@ -61,3 +69,4 @@ public class View extends javax.swing.JFrame{
     }
 
 }
+
