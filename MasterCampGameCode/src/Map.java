@@ -22,7 +22,7 @@ public class Map {
         }
         // create map obstacles
         // horizontal walls
-        for (int i = 0; i < 40; i++) {
+        for (int i = 0; i < 60; i++) {
             int refHWallX; // reference horizontal wall X
             int refHWallY; // reference horizontal wall Y
             int lengthHWall; // length of the horizontal wall
