@@ -3,14 +3,6 @@ import java.awt.Point;
 import java.util.Scanner;
 public class Map {
 
-    private String room =""
-            + "#######\n"
-            + "###   #\n"
-            + "#   0 #\n"
-            + "# H   #\n"
-            + "#   0 #\n"
-            + "##  > #\n"
-            + "#######";
 
     private char[][] room1;
     private MapGenerator m1;
@@ -26,31 +18,6 @@ public class Map {
 
     // initialisation de la map et la position du joueur
     private void init() {
-
-        /*String[] lines = room.split("\\n");
-        int y = 0;
-
-
-
-        //Parcourt chaque ligne et chaque charactère de la room
-        for (int i = 0; i < lines.length; i++) {
-            String line = lines[i];
-            for (int x = 0; x < lines[i].length(); x++) {
-
-                //determine le charactère
-                char charactere = line.charAt(x);
-                map[charactere / 70][x][y] = charactere;
-                map[1 - charactere / 70][x][y] = ' ';
-                //determine la position du joueur
-                if (charactere == 'H') {
-                    playerPosition.x = x;
-                    playerPosition.y = y;
-                }
-            }
-            y++;
-        }
-        //remplace charactère position du joueur par un espace
-        map[1][playerPosition.x][playerPosition.y] = ' ';*/
 
         int y = 0;
 
@@ -118,7 +85,7 @@ public class Map {
             init();
         }
 
-        if (map[1][playerPosition.x + dx][playerPosition.y + dy] != '#' && map[0][playerPosition.x + dx][playerPosition.y + dy] != '#')
+        if ( map[0][playerPosition.x + dx][playerPosition.y + dy] != '#')
              {
             playerPosition.x += dx;
             playerPosition.y += dy;
