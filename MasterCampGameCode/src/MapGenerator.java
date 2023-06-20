@@ -109,6 +109,8 @@ public class MapGenerator {
                 if (refVWallX + j < x - 1)
                     this.map[refVWallX + j][refVWallY] = '#';
             }
+            this.map[2][2] = 'H';
+            this.map[x - 3][y - 3] = '>';
         }
     }
 

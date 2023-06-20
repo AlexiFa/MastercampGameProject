@@ -13,12 +13,12 @@ public class Map {
             + "#######";
 
     private char[][] room1;
-
+    private MapGenerator m1;
     private char[][][] map;
     private Point playerPosition = new Point();
 
     public Map() {
-        MapGenerator m1 = new MapGenerator();
+        m1 = new MapGenerator();
         room1 = m1.getMap();
         map = new char[2][m1.getSizeY()][m1.getSizeX()];
         init();
@@ -104,27 +104,19 @@ public class Map {
 
 
 
-        if (map[1][playerPosition.x + dx][playerPosition.y + dy] == 'O' )
+        if (map[0][playerPosition.x + dx][playerPosition.y + dy] == '0' )
         {
-            map[1][playerPosition.x + dx][playerPosition.y + dy] = ' ';
+            map[0][playerPosition.x + dx][playerPosition.y + dy] = ' ';
         }
 
         //Si le joueur passe sur la porte D une nouvelle room est créée
-        if (map[1][playerPosition.x + dx][playerPosition.y + dy] == 'P')
+        if (map[0][playerPosition.x + dx][playerPosition.y + dy] == '>')
         {
-            room = ""
-                    + "#######\n"
-                    + "###   #\n"
-                    + "#   O #\n"
-                    + "#     #\n"
-                    + "#   O #\n"
-                    + "##  H #\n"
-                    + "#######";
-
+            m1 = new MapGenerator();
+            room1 = m1.getMap();
+            map = new char[2][m1.getSizeY()][m1.getSizeX()];
             init();
         }
-
-
 
         if (map[1][playerPosition.x + dx][playerPosition.y + dy] != '#' && map[0][playerPosition.x + dx][playerPosition.y + dy] != '#')
              {
@@ -132,7 +124,6 @@ public class Map {
             playerPosition.y += dy;
         }
     }
-
 
     @Override
     public String toString()
