@@ -22,14 +22,14 @@ public class Map {
         }
         // create map obstacles
         // horizontal walls
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 40; i++) {
             int refHWallX; // reference horizontal wall X
             int refHWallY; // reference horizontal wall Y
             int lengthHWall; // length of the horizontal wall
             boolean isWall;
 
-            lengthHWall = (int) (Math.random() * (y - 1 - y/2)) + y/2; // random number between y / 4 and y / 2 ( the size of the wall )
-
+            // lengthHWall = (int) (Math.random() * (y - 1 - y/2)) + y/2; // random number between y / 4 and y / 2 ( the size of the wall )
+            lengthHWall = 5;
             // while there is a wall on the line below, above or on the current line, generate another random number
             do{
                 System.out.println("while1");
@@ -44,10 +44,6 @@ public class Map {
                     }
                     if (this.map[refHWallX - 1][k] == '#') { // if there is a wall on the line above
                         System.out.println("if2");
-                        isWall = true;
-                    }
-                    if (this.map[refHWallX][k] == '#') { // if there is a wall on the current line
-                        System.out.println("if3");
                         isWall = true;
                     }
                 }
@@ -75,14 +71,14 @@ public class Map {
             }
         }
         // vertical walls
-        for (int i = 0; i < 4; i++) {
+        for (int i = 0; i < 20; i++) {
             int refVWallY; // reference vertical wall X
             int refVWallX; // reference vertical wall Y
             int lengthVWall; // length of the vertical wall
             boolean isWall;
 
-            lengthVWall = (int) (Math.random() * (x - 10 - 10)) + 10; // random number between 10 and x - 10 ( the size of the wall )
-
+            // lengthVWall = (int) (Math.random() * (x - 10 - 10)) + 10; // random number between 10 and x - 10 ( the size of the wall )
+            lengthVWall = 7;
             // while there is a wall on the line below, above or on the current line, generate another random number
             do{
                 System.out.println("first");
@@ -90,11 +86,9 @@ public class Map {
                 isWall = false;
 
                 for(int k = 1;k < x - 2;k++){
-                    if (this.map[k][refVWallY + 1] == '#' && this.map[k + 1][refVWallY + 1] == '#') // if there is a wall on the line below
+                    if ((this.map[k][refVWallY + 1] == '#' && this.map[k + 1][refVWallY + 1] == '#') || (this.map[k][refVWallY + 2] == '#' && this.map[k + 1][refVWallY + 2] == '#') || (this.map[k][refVWallY + 3] == '#' && this.map[k + 1][refVWallY + 3] == '#') || (this.map[k][refVWallY + 4] == '#' && this.map[k + 1][refVWallY + 4] == '#')) // if there is a wall on the line below
                         isWall = true;
-                    if (this.map[k][refVWallY - 1] == '#' && this.map[k + 1][refVWallY - 1] == '#') // if there is a wall on the line above
-                        isWall = true;
-                    if (this.map[k][refVWallY] == '#' && this.map[k + 1][refVWallY] == '#') // if there is a wall on the current line
+                    if ((this.map[k][refVWallY - 1] == '#' && this.map[k + 1][refVWallY - 1] == '#') || (this.map[k][refVWallY - 2] == '#' && this.map[k + 1][refVWallY - 2] == '#') || (this.map[k][refVWallY - 3] == '#' && this.map[k + 1][refVWallY - 3] == '#') || (this.map[k][refVWallY - 4] == '#' && this.map[k + 1][refVWallY - 4] == '#')) // if there is a wall on the line above
                         isWall = true;
                 }
             }while(isWall); // then, stay in the loop and generate another random number
