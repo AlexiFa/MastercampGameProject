@@ -1,8 +1,8 @@
-public class Map {
+public class MapGenerator {
     public char[][] map;
     public int sizeX, sizeY; // X is the number of lines, Y is the number of columns
 
-    public Map(){
+    public MapGenerator(){
         int x = 22;
         int y = 80;
 //        int x = 22;
@@ -122,7 +122,7 @@ public class Map {
     }
 
     public static void main(String[] args) {
-        Map map = new Map();
+        MapGenerator map = new MapGenerator();
         map.printMap();
     }
 }
