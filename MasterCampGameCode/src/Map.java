@@ -6,24 +6,31 @@ public class Map {
     private String room =""
             + "#######\n"
             + "###   #\n"
-            + "#   O #\n"
+            + "#   0 #\n"
             + "# H   #\n"
-            + "#   O #\n"
-            + "##  P #\n"
+            + "#   0 #\n"
+            + "##  > #\n"
             + "#######";
 
-    private char[][][] map = new char[2][7][7];
+    private char[][] room1;
+
+    private char[][][] map;
     private Point playerPosition = new Point();
 
     public Map() {
+        MapGenerator m1 = new MapGenerator();
+        room1 = m1.getMap();
+        map = new char[2][m1.getSizeY()][m1.getSizeX()];
         init();
     }
 
     // initialisation de la map et la position du joueur
     private void init() {
 
-        String[] lines = room.split("\\n");
+        /*String[] lines = room.split("\\n");
         int y = 0;
+
+
 
         //Parcourt chaque ligne et chaque charactère de la room
         for (int i = 0; i < lines.length; i++) {
@@ -32,6 +39,25 @@ public class Map {
 
                 //determine le charactère
                 char charactere = line.charAt(x);
+                map[charactere / 70][x][y] = charactere;
+                map[1 - charactere / 70][x][y] = ' ';
+                //determine la position du joueur
+                if (charactere == 'H') {
+                    playerPosition.x = x;
+                    playerPosition.y = y;
+                }
+            }
+            y++;
+        }
+        //remplace charactère position du joueur par un espace
+        map[1][playerPosition.x][playerPosition.y] = ' ';*/
+
+        int y = 0;
+
+        //Parcourt chaque ligne et chaque charactère de la room
+        for (int i = 0; i < room1.length; i++) {
+            for (int x = 0; x < room1[i].length; x++) {
+                char charactere = room1[i][x];
                 map[charactere / 70][x][y] = charactere;
                 map[1 - charactere / 70][x][y] = ' ';
                 //determine la position du joueur
@@ -152,12 +178,12 @@ public class Map {
         Map map = new Map();
         System.out.println(map.toString());
         Scanner sc = new Scanner(System.in);
+        System.out.println(-71/70);
         while (true) {
             int direction = sc.nextInt();
             map.move(direction);
             System.out.println(map.toString());
         }
-
     }
 
 }

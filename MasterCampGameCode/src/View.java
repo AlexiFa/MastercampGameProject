@@ -27,7 +27,7 @@ public class View extends javax.swing.JFrame{
 
         jTextArea1.setColumns(9);
         jTextArea1.setRows(9);
-        jTextArea1.setFont(new java.awt.Font("Courier", 1, 36));
+        jTextArea1.setFont(new java.awt.Font("Courier New", 1, 36));
         jTextArea1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextArea1KeyPressed(evt);

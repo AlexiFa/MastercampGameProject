@@ -1,6 +1,6 @@
 public class MapGenerator {
-    public char[][] map;
-    public int sizeX, sizeY; // X is the number of lines, Y is the number of columns
+    private char[][] map;
+    private int sizeX, sizeY; // X is the number of lines, Y is the number of columns
 
     public MapGenerator(){
         int x = 22;
@@ -121,8 +121,15 @@ public class MapGenerator {
         }
     }
 
-    public static void main(String[] args) {
-        MapGenerator map = new MapGenerator();
-        map.printMap();
+    public int getSizeX() {
+        return sizeX;
+    }
+
+    public int getSizeY() {
+        return sizeY;
+    }
+
+    public char[][] getMap() {
+        return map;
     }
 }
