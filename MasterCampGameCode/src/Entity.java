@@ -3,17 +3,20 @@
 //heal() heals the entity
 //move() moves the entity on the map
 
+import java.awt.Point;
 import java.util.Random;
 
 public class Entity {
     private int maxHp, hp, level;
     private final String name;
+    private Point position;
 
     public Entity(int hp, int level, String name){
         this.hp = hp;
         this.maxHp = hp;
         this.level = level;
         this.name = name;
+        this.position = new Point();
     }
 
     public int getHp(){
@@ -28,6 +31,9 @@ public class Entity {
     public int getLevel(){
         return this.level;
     }
+    public Point getPosition(){
+        return this.position;
+    }
 
     public void setHp(int hp) {
         this.hp = hp;
@@ -37,6 +43,9 @@ public class Entity {
     }
     public void setLevel(int level) {
         this.level = level;
+    }
+    public void setPosition(Point position) {
+        this.position = position;
     }
 
     public void attack(Entity entity){

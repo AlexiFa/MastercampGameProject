@@ -5,34 +5,29 @@
 //gainExperience() adds experience to the player and levels them up if they have enough experience
 //levelUp() levels up the player
 
-import java.awt.Point;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Player extends Entity{
     private int experience;
-    private ArrayList<Items> inventory;
+    private List<Items> inventory;
     private Items selectedItem;
-    private Point playerPosition;
 
     public Player(int hp, String name) {
         super(hp, 1, name);
         experience = 0;
         inventory = new ArrayList<Items>();
         selectedItem = null;
-        playerPosition = new Point();
     }
 
     public int getExperience(){
         return this.experience;
     }
-    public ArrayList<Items> getInventory(){
+    public List<Items> getInventory(){
         return this.inventory;
     }
     public Items getSelectedItem(){
         return this.selectedItem;
-    }
-    public Point getPlayerPosition(){
-        return this.playerPosition;
     }
 
     public void setExperience(int experience){
@@ -40,6 +35,9 @@ public class Player extends Entity{
     }
     public void setSelectedItem(Items selectedItem){
         this.selectedItem = selectedItem;
+    }
+    public void setInventory(List<Items> inventory){
+        this.inventory = inventory;
     }
 
     public int getDamage(){
@@ -73,5 +71,24 @@ public class Player extends Entity{
         this.setLevel(this.getLevel() + 1);
         this.setMaxHp(this.getMaxHp() + 10);
         this.setHp(this.getMaxHp());
+    }
+
+    @Override
+    public String toString(){
+        String playerString =
+        "Player:\n" +
+        this.getHp() + "\n" +
+        this.getMaxHp() + "\n" +
+        this.getExperience() + "\n" +
+        this.getName() + "\n";
+        for (int i = 0; i < this.getInventory().size(); i++){
+            playerString += this.getInventory().get(i).getName() + " ";
+        }
+        playerString += "\n" +
+        this.getSelectedItem().getName() + "\n" +
+        this.getPosition() + "\n" +
+        this.getLevel();
+
+        return playerString;
     }
 }

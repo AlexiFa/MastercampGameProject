@@ -20,7 +20,15 @@ public class Monster extends Entity{
     public Items death(){
         //ajouter une façon de retirer l'entité de la map
         Random random = new Random();
-        int i = random.nextInt(Main.itemsList.size());
-        return Main.itemsList.get(i);
+        int randomNumber = random.nextInt(2) + 1;
+        if (randomNumber == 1){
+            Random random2 = new Random();
+            int i = random2.nextInt(Main.attackItemList.size());
+            return Main.attackItemList.get(i);
+        } else {
+            Random random2 = new Random();
+            int i = random2.nextInt(Main.healItemList.size());
+            return Main.healItemList.get(i);
+        }
     }
 }
