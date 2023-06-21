@@ -5,18 +5,21 @@
 //gainExperience() adds experience to the player and levels them up if they have enough experience
 //levelUp() levels up the player
 
+import java.awt.Point;
 import java.util.ArrayList;
 
 public class Player extends Entity{
     private int experience;
     private ArrayList<Items> inventory;
     private Items selectedItem;
+    private Point playerPosition;
 
     public Player(int hp, String name) {
         super(hp, 1, name);
         experience = 0;
         inventory = new ArrayList<Items>();
         selectedItem = null;
+        playerPosition = new Point();
     }
 
     public int getExperience(){
@@ -27,6 +30,9 @@ public class Player extends Entity{
     }
     public Items getSelectedItem(){
         return this.selectedItem;
+    }
+    public Point getPlayerPosition(){
+        return this.playerPosition;
     }
 
     public void setExperience(int experience){

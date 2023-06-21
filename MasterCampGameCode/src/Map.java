@@ -7,7 +7,6 @@ public class Map {
     private char[][] room1;
     private MapGenerator m1;
     private char[][][] map;
-    private Point playerPosition = new Point();
 
     public Map() {
         m1 = new MapGenerator();
