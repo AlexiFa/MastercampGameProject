@@ -78,4 +78,34 @@ public class Player extends Entity{
         this.setMaxHp(this.getMaxHp() + 10);
         this.setHp(this.getMaxHp());
     }
+
+    @Override
+    public int[] move(int direction){
+        //direction saisies claiver
+        int dx =0;
+        int dy =0;
+
+        switch (direction) {
+            case 37:
+                //gauche
+                dx = -1;
+                break;
+            case 39:
+                //droite
+                dx = 1;
+                break;
+            case 38:
+                //haut
+                dy = -1;
+                break;
+            case 40:
+                //bas
+                dy = 1;
+                break;
+            default:
+                dy = 0;
+                break;
+        }
+        return new int[]{dx, dy};
+    }
 }
