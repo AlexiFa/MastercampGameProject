@@ -25,7 +25,7 @@ public class Monster extends Entity{
     }
 
     @Override
-    public int[] move(int direction){
+    public int[] move(int direction){ // nombre aléatoire 0 et 3
         String[] directions = {"N", "S", "E", "W"};
         // Random random = new Random();
         // int i = random.nextInt(4);

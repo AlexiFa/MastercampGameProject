@@ -101,9 +101,6 @@ public class Map {
         return out;
     }
 
-
-
-
     public static void main(String[] args)
     {
         Map map = new Map();
