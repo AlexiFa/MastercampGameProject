@@ -6,22 +6,22 @@ public class Save {
         String fileName = "savefile.txt";
         String playerData = n.toString();
         
-
-        String mapData = "";
+        String mapData = m.toString();
 
         String monsterData =
+        "Monsters:\n" + 
         mon1.toString() +
         "\n" +
         mon2.toString() +
         "\n" +
         mon3.toString();
 
-        String attackItemData = "AttackItem\n";
+        String attackItemData = "AttackItem:\n";
         for (int i = 0; i < attackItemList.size(); i++){
             attackItemData += attackItemList.get(i).toString() + "\n";
         }
 
-        String healItemData = "HealItem\n";
+        String healItemData = "HealItem:\n";
         for (int i = 0; i < healItemList.size(); i++){
             healItemData += healItemList.get(i).toString() + "\n";
         }
