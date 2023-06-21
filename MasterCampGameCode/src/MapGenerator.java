@@ -111,6 +111,7 @@ public class MapGenerator {
             }
             this.map[2][2] = 'H';
             this.map[x - 3][y - 3] = '>';
+            this.map[5][3] = 'M';
         }
     }
 
