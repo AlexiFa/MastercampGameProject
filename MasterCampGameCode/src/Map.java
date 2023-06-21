@@ -1,25 +1,45 @@
 
 import java.awt.Point;
+import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Random;
 public class Map {
 
 
     private char[][] room1;
     private MapGenerator m1;
     private char[][][] map;
+    private Player player;
+    private ArrayList<Items> arme = new ArrayList<Items>();
+    private Items potion;
+
+    private Random rand = new Random();
+
+    private Monster monster;
 
     public Map() {
+        player = new Player(100, "Hero");
+
+        arme.add(new Items(rand.nextInt(100 - 20 + 1) + 20, "Epee", false));
+        arme.add(new Items(rand.nextInt(100 - 20 + 1) + 20, "Hache", false));
+        arme.add(new Items(rand.nextInt(100 - 20 + 1) + 20, "Dague", false));
+
+        potion = new Items(rand.nextInt(50 - 10 + 1) + 10, "Potion", true);
+
+        monster = new Monster(100, 1, 120, "monstre");
+
         m1 = new MapGenerator();
         room1 = m1.getMap();
         map = new char[2][m1.getSizeY()][m1.getSizeX()];
-        init();
+        init(player);
     }
 
+
+
+
     // initialisation de la map et la position du joueur
-    private void init() {
-
+    private void init(Player p) {
         int y = 0;
-
         //Parcourt chaque ligne et chaque charactère de la room
         for (int i = 0; i < room1.length; i++) {
             for (int x = 0; x < room1[i].length; x++) {
@@ -28,67 +48,73 @@ public class Map {
                 map[1 - charactere / 70][x][y] = ' ';
                 //determine la position du joueur
                 if (charactere == 'H') {
-                    playerPosition.x = x;
-                    playerPosition.y = y;
+                    player.setPlayerPosition(new Point(x, y));
                 }
             }
             y++;
         }
         //remplace charactère position du joueur par un espace
-        map[1][playerPosition.x][playerPosition.y] = ' ';
+        map[1][player.getPlayerPosition().x][player.getPlayerPosition().y] = ' ';
 
     }
 
     //deplacement du joueur dans la room
     public void move(int direction)
     {
-        //direction saisies claiver
-        int dx =0;
-        int dy =0;
+        int[] deplacements = player.move(direction);
+        int dx = deplacements[0];
+        int dy = deplacements[1];
 
-        switch (direction) {
-            case 37:
-                //gauche
-                dx = -1;
-                break;
-            case 39:
-                //droite
-                dx = 1;
-                break;
-            case 38:
-                //haut
-                dy = -1;
-                break;
-            case 40:
-                //bas
-                dy = 1;
-                break;
-            default:
-                dy = 0;
-                break;
-        }
-
-
-
-        if (map[0][playerPosition.x + dx][playerPosition.y + dy] == '0' )
+        if (map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == '0' )
         {
-            map[0][playerPosition.x + dx][playerPosition.y + dy] = ' ';
+            map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] = ' ';
         }
+
+        if (map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == '*')
+        {
+            map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] = ' ';
+            player.addToInventory(potion);
+            System.out.println("Vous avez trouvé une potion");
+            System.out.println(potion.getValue());
+
+
+        }
+
+        if(map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == 'A')
+        {
+            map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] = ' ';
+            player.addToInventory(arme.get(rand.nextInt(arme.size())));
+            System.out.println("Vous avez trouvé une arme");
+            System.out.println(arme.get(rand.nextInt(arme.size())).getValue());
+
+        }
+
+        
+
 
         //Si le joueur passe sur la porte D une nouvelle room est créée
-        if (map[0][playerPosition.x + dx][playerPosition.y + dy] == '>')
+        if (map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == '>')
         {
             m1 = new MapGenerator();
             room1 = m1.getMap();
             map = new char[2][m1.getSizeY()][m1.getSizeX()];
-            init();
+            init(player);
         }
 
-        if ( map[0][playerPosition.x + dx][playerPosition.y + dy] != '#')
+        if ( map[1][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] != 'M' && map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] != '#' )
              {
-            playerPosition.x += dx;
-            playerPosition.y += dy;
+                 int tempx = player.getPlayerPosition().x += dx;
+                 int tempy = player.getPlayerPosition().y += dy;
+                 player.setPlayerPosition(new Point(tempx, tempy));
         }
+
+         if (map[1][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == 'M')
+        {
+            player.setHp(player.getHp() - monster.getDamage());
+            System.out.println("Monster damage " + monster.getDamage());
+            System.out.println("Player HP " + player.getHp() );
+        }
+
     }
 
     @Override
@@ -101,7 +127,7 @@ public class Map {
             for(int x=0; x< map[0].length; x++)
             {
                 //si la position du joueur est égale à la position du charactère, affiche H
-                if (playerPosition.x == x && playerPosition.y == y)
+                if (player.getPlayerPosition().x == x && player.getPlayerPosition().y == y)
                 {
                     out += ('H');
                 }
@@ -116,7 +142,6 @@ public class Map {
                 }
                 else
                 {
-
                     out += map[0][x][y];
                 }
 
@@ -125,9 +150,6 @@ public class Map {
         }
         return out;
     }
-
-
-
 
     public static void main(String[] args)
     {

@@ -13,6 +13,10 @@ public class Player extends Entity{
     private List<Items> inventory;
     private Items selectedItem;
 
+    public void setPlayerPosition(Point playerPosition) {
+        this.playerPosition = playerPosition;
+    }
+
     public Player(int hp, String name) {
         super(hp, 1, name);
         experience = 0;
@@ -90,5 +94,35 @@ public class Player extends Entity{
         this.getLevel();
 
         return playerString;
+    }
+    
+    @Override
+    public int[] move(int direction){
+        //direction saisies claiver
+        int dx =0;
+        int dy =0;
+
+        switch (direction) {
+            case 37:
+                //gauche
+                dx = -1;
+                break;
+            case 39:
+                //droite
+                dx = 1;
+                break;
+            case 38:
+                //haut
+                dy = -1;
+                break;
+            case 40:
+                //bas
+                dy = 1;
+                break;
+            default:
+                dy = 0;
+                break;
+        }
+        return new int[]{dx, dy};
     }
 }
