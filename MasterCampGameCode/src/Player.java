@@ -86,7 +86,7 @@ public class Player extends Entity{
         }
         playerString += "\n" +
         this.getSelectedItem().getName() + "\n" +
-        this.getPosition() + "\n" +
+        this.getPosition().x + "," + this.getPosition().y + "\n" +
         this.getLevel();
 
         return playerString;

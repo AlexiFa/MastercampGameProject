@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.*;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -133,11 +132,11 @@ public class View extends javax.swing.JFrame{
             }
             player.setInventory(inventory);
             for(Items item : inventory){
-                if 
+                
             }
 
         } catch (IOException e) {
-            System.err.println("An error occurred while reading the file: " + e.getMessage());
+            return false;
         }
     }
 

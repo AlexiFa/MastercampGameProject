@@ -13,10 +13,6 @@ public class Monster extends Entity{
         return this.damage;
     }
 
-    @Override
-    public String toString(){
-        return(this.getName() + "\nLife points : " + this.getHp() + "/" + this.getMaxHp());
-    }
     public Items death(){
         //ajouter une façon de retirer l'entité de la map
         Random random = new Random();
@@ -30,5 +26,16 @@ public class Monster extends Entity{
             int i = random2.nextInt(Main.healItemList.size());
             return Main.healItemList.get(i);
         }
+    }
+
+    @Override
+    public String toString(){
+        return "Monster:\n" +
+        this.getHp() + "\n" +
+        this.getMaxHp() + "\n" +
+        this.getName() + "\n" +
+        this.getLevel() + "\n" +
+        this.getPosition().x + "," + this.getPosition().y + "\n" +
+        this.getDamage();
     }
 }

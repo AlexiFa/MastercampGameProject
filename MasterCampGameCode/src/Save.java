@@ -10,41 +10,23 @@ public class Save {
         String mapData = "";
 
         String monsterData =
-        "Monster\n" +
-        mon1.getHp() + "\n" +
-        mon1.getMaxHp() + "\n" +
-        mon1.getName() + "\n" +
-        mon1.getLevel() + "\n" +
-        mon1.getPosition() + "\n" +
-        mon1.getDamage() + "\n" +
+        mon1.toString() +
         "\n" +
-        "Monster\n" +
-        mon2.getHp() + "\n" +
-        mon2.getMaxHp() + "\n" +
-        mon2.getName() + "\n" +
-        mon2.getLevel() + "\n" +
-        mon2.getPosition() + "\n" +
-        mon2.getDamage() + "\n" +
+        mon2.toString() +
         "\n" +
-        "Monster\n" +
-        mon3.getHp() + "\n" +
-        mon3.getMaxHp() + "\n" +
-        mon3.getName() + "\n" +
-        mon3.getLevel() + "\n" +
-        mon3.getPosition() + "\n" +
-        mon3.getDamage() + "\n";
+        mon3.toString();
 
         String attackItemData = "AttackItem\n";
         for (int i = 0; i < attackItemList.size(); i++){
-            attackItemData += attackItemList.get(i).getName() + "\n" + attackItemList.get(i).getValue() + "\n";
+            attackItemData += attackItemList.get(i).toString() + "\n";
         }
 
         String healItemData = "HealItem\n";
         for (int i = 0; i < healItemList.size(); i++){
-            healItemData += healItemList.get(i).getName() + "\n" + healItemList.get(i).getValue() + "\n";
+            healItemData += healItemList.get(i).toString() + "\n";
         }
 
-        String data = playerData + "\n" + mapData + "\n" + monsterData + "\n" + attackItemData + "\n" + healItemData;
+        String data = playerData + "\n\n" + mapData + "\n\n" + monsterData + "\n\n" + attackItemData + "\n\n" + healItemData;
 
         try {
             // Create a FileWriter object with the specified file name
