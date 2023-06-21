@@ -3,7 +3,8 @@ import java.awt.event.*;
 import java.util.ArrayList;
 import javax.swing.*;
 public class Main {
-    static ArrayList<Items> itemsList = new ArrayList<Items>();
+    static ArrayList<Items> attackItemList = new ArrayList<Items>();
+    static ArrayList<Items> healItemList = new ArrayList<Items>();
     public static void main(String[] args) {
 //        // create map grid with swing
 //        JFrame frame = new JFrame("Map");

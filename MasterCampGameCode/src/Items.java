@@ -30,4 +30,11 @@ public class Items {
     public void setType(boolean type){
         this.type = type;
     }
+
+    @Override
+    public String toString(){
+        return "Item:\n" +
+        this.getValue() + "\n" +
+        this.getName();
+    }
 }

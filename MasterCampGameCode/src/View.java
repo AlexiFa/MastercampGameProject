@@ -1,4 +1,10 @@
 import java.awt.*;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 
 public class View extends javax.swing.JFrame{
 
@@ -71,6 +77,25 @@ public class View extends javax.swing.JFrame{
                 new View().setVisible(true);
             }
         });
+    }
+
+
+    public boolean fetchSaveFile(){
+        String filePath = "savefile.txt";
+        Path path = Paths.get(filePath);
+
+        if (!Files.exists(path)) {
+           return false; 
+        }
+
+        try {
+            for (String line : Files.readAllLines(path)) {
+                System.out.println(line);
+            }
+
+        } catch (IOException e) {
+            return false;
+        }
     }
 
 }
