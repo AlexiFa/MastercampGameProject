@@ -92,7 +92,6 @@ public class Map {
                 }
                 else
                 {
-
                     out += map[0][x][y];
                 }
 
