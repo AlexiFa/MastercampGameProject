@@ -23,4 +23,32 @@ public class Monster extends Entity{
         int i = random.nextInt(Main.itemsList.size());
         return Main.itemsList.get(i);
     }
+
+    @Override
+    public int[] move(int direction){
+        String[] directions = {"N", "S", "E", "W"};
+        // Random random = new Random();
+        // int i = random.nextInt(4);
+        int dx = 0;
+        int dy = 0;
+        switch(directions[direction]){
+            case "N":
+                dy = -1;
+                break;
+            case "S":
+                dy = 1;
+                break;
+            case "E":
+                dx = 1;
+                break;
+            case "W":
+                dx = -1;
+                break;
+            default:
+                dy = 0;
+                break;
+        }
+        return new int[]{dx, dy};
+        //aussi faire une vérif qu'il n'y a pas de mur en face
+    }
 }

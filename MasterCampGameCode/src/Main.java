@@ -22,6 +22,5 @@ public class Main {
 //            }
 //        }
 //        frame.setSize(1000, 800);
-
     }
 }
