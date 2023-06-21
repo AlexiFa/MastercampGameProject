@@ -7,20 +7,19 @@ public class Map {
     private char[][] room1;
     private MapGenerator m1;
     private char[][][] map;
-    private Point playerPosition = new Point();
+    private Player player;
 
     public Map() {
+        player = new Player(100, "Hero");
         m1 = new MapGenerator();
         room1 = m1.getMap();
         map = new char[2][m1.getSizeY()][m1.getSizeX()];
-        init();
+        init(player);
     }
 
     // initialisation de la map et la position du joueur
-    private void init() {
-
+    private void init(Player p) {
         int y = 0;
-
         //Parcourt chaque ligne et chaque charactère de la room
         for (int i = 0; i < room1.length; i++) {
             for (int x = 0; x < room1[i].length; x++) {
@@ -29,14 +28,15 @@ public class Map {
                 map[1 - charactere / 70][x][y] = ' ';
                 //determine la position du joueur
                 if (charactere == 'H') {
-                    playerPosition.x = x;
-                    playerPosition.y = y;
+                    player.setPlayerPosition(new Point(x, y));
+//                    playerPosition.x = x;
+//                    playerPosition.y = y;
                 }
             }
             y++;
         }
         //remplace charactère position du joueur par un espace
-        map[1][playerPosition.x][playerPosition.y] = ' ';
+        map[1][player.getPlayerPosition().x][player.getPlayerPosition().y] = ' ';
 
     }
 
@@ -71,24 +71,25 @@ public class Map {
 
 
 
-        if (map[0][playerPosition.x + dx][playerPosition.y + dy] == '0' )
+        if (map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == '0' )
         {
-            map[0][playerPosition.x + dx][playerPosition.y + dy] = ' ';
+            map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] = ' ';
         }
 
         //Si le joueur passe sur la porte D une nouvelle room est créée
-        if (map[0][playerPosition.x + dx][playerPosition.y + dy] == '>')
+        if (map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == '>')
         {
             m1 = new MapGenerator();
             room1 = m1.getMap();
             map = new char[2][m1.getSizeY()][m1.getSizeX()];
-            init();
+            init(player);
         }
 
-        if ( map[0][playerPosition.x + dx][playerPosition.y + dy] != '#')
+        if ( map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] != '#')
              {
-            playerPosition.x += dx;
-            playerPosition.y += dy;
+                 int tempx = player.getPlayerPosition().x += dx;
+                 int tempy = player.getPlayerPosition().y += dy;
+                 player.setPlayerPosition(new Point(tempx, tempy));
         }
     }
 
@@ -102,7 +103,7 @@ public class Map {
             for(int x=0; x< map[0].length; x++)
             {
                 //si la position du joueur est égale à la position du charactère, affiche H
-                if (playerPosition.x == x && playerPosition.y == y)
+                if (player.getPlayerPosition().x == x && player.getPlayerPosition().y == y)
                 {
                     out += ('H');
                 }
