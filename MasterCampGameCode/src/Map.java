@@ -49,8 +49,6 @@ public class Map {
                 //determine la position du joueur
                 if (charactere == 'H') {
                     player.setPlayerPosition(new Point(x, y));
-//                    playerPosition.x = x;
-//                    playerPosition.y = y;
                 }
             }
             y++;
@@ -63,33 +61,9 @@ public class Map {
     //deplacement du joueur dans la room
     public void move(int direction)
     {
-        //direction saisies claiver
-        int dx =0;
-        int dy =0;
-
-        switch (direction) {
-            case 37:
-                //gauche
-                dx = -1;
-                break;
-            case 39:
-                //droite
-                dx = 1;
-                break;
-            case 38:
-                //haut
-                dy = -1;
-                break;
-            case 40:
-                //bas
-                dy = 1;
-                break;
-            default:
-                dy = 0;
-                break;
-        }
-
-
+        int[] deplacements = player.move(direction);
+        int dx = deplacements[0];
+        int dy = deplacements[1];
 
         if (map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == '0' )
         {
@@ -168,7 +142,6 @@ public class Map {
                 }
                 else
                 {
-
                     out += map[0][x][y];
                 }
 
@@ -178,12 +151,8 @@ public class Map {
         return out;
     }
 
-
-
-
     public static void main(String[] args)
     {
-
 
         Map map = new Map();
         System.out.println(map.toString());

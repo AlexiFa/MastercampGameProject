@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.awt.*;
 
 public class View extends javax.swing.JFrame{
 

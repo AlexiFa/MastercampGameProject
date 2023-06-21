@@ -5,8 +5,6 @@ public class MapGenerator {
     public MapGenerator(){
         int x = 22;
         int y = 80;
-//        int x = 22;
-//        int y = 22;
         this.sizeX = x;
         this.sizeY = y;
         // create map borders
@@ -28,44 +26,27 @@ public class MapGenerator {
             int lengthHWall; // length of the horizontal wall
             boolean isWall;
 
-            // lengthHWall = (int) (Math.random() * (y - 1 - y/2)) + y/2; // random number between y / 4 and y / 2 ( the size of the wall )
             lengthHWall = 5;
+
             // while there is a wall on the line below, above or on the current line, generate another random number
             do{
-                System.out.println("while1");
                 refHWallX = (int) (Math.random() * (x - 4)) + 2; // random number between 2 and x - 2
                 isWall = false;
 
                 for(int k = 1;k < y - 1;k++){
-                    System.out.println("for1");
                     if (this.map[refHWallX + 1][k] == '#') { // if there is a wall on the line below
                         isWall = true;
-                        System.out.println("if1");
                     }
                     if (this.map[refHWallX - 1][k] == '#') { // if there is a wall on the line above
-                        System.out.println("if2");
                         isWall = true;
                     }
                 }
             }while(isWall); // then, stay in the loop and generate another random number
 
             refHWallY = (int) (Math.random() * (y - 4)) + 2; // random number between 2 and y - 2 ( to avoid walls on the borders )
-            // while the wall goes out of the map, decrement the random number (move the wall backward)
-            do{
-                System.out.println("while2");
-                isWall = false;
-
-                if(refHWallY + lengthHWall > y - 1) {
-                    System.out.println("if4");
-                    refHWallY--;
-                    isWall = true;
-                }
-            }while(isWall);
 
             for(int j = 0;j < lengthHWall - 1;j++){
-                System.out.println("for2");
                 if (refHWallY + j < y - 1) {
-                    System.out.println("if5");
                     this.map[refHWallX][refHWallY + j] = '#';
                 }
             }
@@ -77,11 +58,10 @@ public class MapGenerator {
             int lengthVWall; // length of the vertical wall
             boolean isWall;
 
-            // lengthVWall = (int) (Math.random() * (x - 10 - 10)) + 10; // random number between 10 and x - 10 ( the size of the wall )
             lengthVWall = 7;
+
             // while there is a wall on the line below, above or on the current line, generate another random number
             do{
-                System.out.println("first");
                 refVWallY = (int) (Math.random() * (y - 4)) + 2; // random number between 2 and y - 2
                 isWall = false;
 
@@ -93,17 +73,7 @@ public class MapGenerator {
                 }
             }while(isWall); // then, stay in the loop and generate another random number
 
-            // while the wall goes out of the map, decrement the random number (move the wall backward)
-            do{
-                System.out.println("second");
-                refVWallX = (int) (Math.random() * (x - 4)) + 2; // random number between 2 and x - 2 ( to avoid walls on the borders )
-                isWall = false;
-
-                if(refVWallX + lengthVWall > x - 1) {
-                    refVWallX--;
-                    isWall = true;
-                }
-            }while(isWall);
+            refVWallX = (int) (Math.random() * (x - 4)) + 2; // random number between 2 and x - 2 ( to avoid walls on the borders )
 
             for(int j = 0;j < lengthVWall - 1;j++){
                 if (refVWallX + j < x - 1)

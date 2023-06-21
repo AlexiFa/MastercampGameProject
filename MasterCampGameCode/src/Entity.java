@@ -5,7 +5,7 @@
 
 import java.util.Random;
 
-public class Entity {
+public abstract class Entity {
     private int maxHp, hp, level;
     private final String name;
 
@@ -73,28 +73,5 @@ public class Entity {
         }
     }
 
-    public void move(){
-        String[] direction = {"N", "S", "E", "W"};
-        Random random = new Random();
-        int i = random.nextInt(4);
-        switch(direction[i]){
-            case "N":
-                //ajouter une façon de vérifier si la case est libre
-                //ajouter une façon de déplacer l'entité
-                break;
-            case "S":
-                //ajouter une façon de vérifier si la case est libre
-                //ajouter une façon de déplacer l'entité
-                break;
-            case "E":
-                //ajouter une façon de vérifier si la case est libre
-                //ajouter une façon de déplacer l'entité
-                break;
-            case "W":
-                //ajouter une façon de vérifier si la case est libre
-                //ajouter une façon de déplacer l'entité
-                break;
-        }
-        //aussi faire une vérif qu'il n'y a pas de mur en face
-    }
+    public abstract int[] move(int direction);
 }
