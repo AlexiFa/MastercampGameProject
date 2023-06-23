@@ -5,6 +5,7 @@ import javax.swing.*;
 public class Main {
     static ArrayList<Items> attackItemList = new ArrayList<Items>();
     static ArrayList<Items> healItemList = new ArrayList<Items>();
+    static ArrayList<Monster> monsterList = new ArrayList<Monster>();
     public static void main(String[] args) {
 //        // create map grid with swing
 //        JFrame frame = new JFrame("Map");

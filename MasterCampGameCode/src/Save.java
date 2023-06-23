@@ -2,19 +2,19 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Save {
-    public void savefile(Player n, Map m, Monster mon1, Monster mon2, Monster mon3, ArrayList<Items> attackItemList, ArrayList<Items> healItemList){
+    public void savefile(Player n, Map m, ArrayList<Monster> monsters, ArrayList<Items> attackItemList, ArrayList<Items> healItemList){
         String fileName = "savefile.txt";
         String playerData = n.toString();
         
-        String mapData = m.toString();
+        String mapData = "Map:\n" + m.toString();
 
         String monsterData =
         "Monsters:\n" + 
-        mon1.toString() +
+        monsters.get(0).toString() +
         "\n" +
-        mon2.toString() +
+        monsters.get(1).toString() +
         "\n" +
-        mon3.toString();
+        monsters.get(2).toString();
 
         String attackItemData = "AttackItem:\n";
         for (int i = 0; i < attackItemList.size(); i++){
