@@ -17,6 +17,14 @@ public class Map {
 
     private Monster monster;
 
+    public char[][] getRoom1() {
+        return room1;
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
     public Map() {
         player = new Player(100, "Hero");
 
