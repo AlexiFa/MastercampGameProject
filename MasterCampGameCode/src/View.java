@@ -66,8 +66,15 @@ public class View extends javax.swing.JFrame{
 
 
     private void jTextArea1KeyPressed(java.awt.event.KeyEvent evt) {
-        map.move(evt.getKeyCode());
-        jTextArea1.setText(map.toString());
+        // si une fleche est appuyée
+        if(evt.getKeyCode() == 37 || evt.getKeyCode() == 38 || evt.getKeyCode() == 39 || evt.getKeyCode() == 40){
+            map.move(evt.getKeyCode());
+            jTextArea1.setText(map.toString());
+        }
+        // si la touche s est appuyée
+        if(evt.getKeyCode() == 83){
+
+        }
     }
 
     public static void main(String[] args) {

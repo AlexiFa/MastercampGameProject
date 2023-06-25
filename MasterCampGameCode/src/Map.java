@@ -17,6 +17,10 @@ public class Map {
 
     private Monster monster;
 
+    public Player getPlayer() {
+        return player;
+    }
+
     public Map() {
         player = new Player(100, "Hero");
 

@@ -2,7 +2,8 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Save {
-    public void savefile(Player n, Map m, ArrayList<Monster> monsters, ArrayList<Items> attackItemList, ArrayList<Items> healItemList){
+    public static void savefile(Map m, ArrayList<Monster> monsters, ArrayList<Items> attackItemList, ArrayList<Items> healItemList){
+        Player n = m.getPlayer();
         String fileName = "savefile.txt";
         String playerData = n.toString();
         
