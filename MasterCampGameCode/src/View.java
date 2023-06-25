@@ -13,6 +13,7 @@ public class View extends javax.swing.JFrame{
         setLocationRelativeTo(null);
         jTextArea1.setText(map.toString());
 
+        startMonsterTimer(); // Start the monster timer
     }
 
 
@@ -60,9 +61,6 @@ public class View extends javax.swing.JFrame{
 
     private void jTextArea1KeyPressed(java.awt.event.KeyEvent evt) {
         map.move(evt.getKeyCode());
-        Random rand = new Random();
-        int n = rand.nextInt(4);
-        map.moveMonster(n);
         jTextArea1.setText(map.toString());
     }
 
@@ -103,5 +101,19 @@ public class View extends javax.swing.JFrame{
         }
     }*/
 
+    private void startMonsterTimer(){
+        Timer timer = new Timer();
+        int delay = 500; // milliseconds
+
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                Random rand = new Random();
+                int n = rand.nextInt(4);
+                map.moveMonster(n);
+                jTextArea1.setText(map.toString());
+            }
+        }, delay, delay);
+    }
 }
 
