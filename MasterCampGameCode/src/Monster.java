@@ -19,12 +19,12 @@ public class Monster extends Entity{
         int randomNumber = random.nextInt(2) + 1;
         if (randomNumber == 1){
             Random random2 = new Random();
-            int i = random2.nextInt(Main.attackItemList.size());
-            return Main.attackItemList.get(i);
+            int i = random2.nextInt(View.attackItemList.size());
+            return View.attackItemList.get(i);
         } else {
             Random random2 = new Random();
-            int i = random2.nextInt(Main.healItemList.size());
-            return Main.healItemList.get(i);
+            int i = random2.nextInt(View.healItemList.size());
+            return View.healItemList.get(i);
         }
     }
 

@@ -34,7 +34,7 @@ public class Items {
     @Override
     public String toString(){
         return "Item:\n" +
-        this.getValue() + "\n" +
+        this.getValue() + "," +
         this.getName();
     }
 }
