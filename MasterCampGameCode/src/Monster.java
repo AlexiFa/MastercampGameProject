@@ -64,6 +64,5 @@ public class Monster extends Entity{
                 break;
         }
         return new int[]{dx, dy};
-        //aussi faire une vérif qu'il n'y a pas de mur en face
     }
 }

@@ -13,10 +13,6 @@ public class Player extends Entity{
     private List<Items> inventory;
     private Items selectedItem;
 
-    public void setPlayerPosition(Point playerPosition) {
-        this.playerPosition = playerPosition;
-    }
-
     public Player(int hp, String name) {
         super(hp, 1, name);
         experience = 0;
