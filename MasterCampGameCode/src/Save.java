@@ -114,19 +114,23 @@ public class Save {
             }
             //Items
             for(String line : attackItemLines){
-                String[] item = line.split(",");
-                int value = Integer.parseInt(item[0].trim());
-                String name = item[1].trim();
-                Items attackItem = new Items(value, name, false);
-                savedMap.addArme(attackItem);
+                if(!line.equals("Item:")){
+                    String[] item = line.split(",");
+                    int value = Integer.parseInt(item[0].trim());
+                    String name = item[1].trim();
+                    Items attackItem = new Items(value, name, false);
+                    savedMap.addArme(attackItem);
+                }
             }
 
             for(String line : healItemLines){
-                String[] item = line.split(",");
-                int value = Integer.parseInt(item[0].trim());
-                String name = item[1].trim();
-                Items healItem = new Items(value, name, true);
-                savedMap.addPotion(healItem);
+                if(!line.equals("Item:")){
+                    String[] item = line.split(",");
+                    int value = Integer.parseInt(item[0].trim());
+                    String name = item[1].trim();
+                    Items healItem = new Items(value, name, true);
+                    savedMap.addPotion(healItem);
+                }
             }
 
             // Player
