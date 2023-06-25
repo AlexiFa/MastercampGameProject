@@ -109,4 +109,13 @@ public class MapGenerator {
     public char[][] getMap() {
         return map;
     }
+
+    public void setSize() {
+        this.sizeX = map.length;
+        this.sizeY = map[0].length;
+    }
+
+    public void setMap(char[][] map) {
+        this.map = map;
+    }
 }

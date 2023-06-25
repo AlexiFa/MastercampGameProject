@@ -1,16 +1,22 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.ArrayList;
 import javax.swing.*;
 public class Pause extends JFrame{
     private JScrollPane jScrollPane1;
     private JTextArea jTextArea1;
     private int selected;
+    private ArrayList<String> options = new ArrayList<String>();
 
     public Pause(){
         initComponents();
         setTitle("Interface Jeu");
         setLocationRelativeTo(null);
-        jTextArea1.setText("[Resume]\nQuit");
+        //options.add("[Resume]");
+        options.add("[Restart]");
+        options.add("Quit");
+        selected = 0;
+        setText();
         selected = 0;
     }
 
@@ -43,28 +49,50 @@ public class Pause extends JFrame{
     }
 
     private void jTextArea1KeyPressed(KeyEvent evt) {
-        if (evt.getKeyCode() == KeyEvent.VK_UP) {
-            if (selected == 0) {
-                selected = 1;
-                jTextArea1.setText("Resume\n[Quit]");
-            } else {
-                selected = 0;
-                jTextArea1.setText("[Resume]\nQuit");
+        switch (evt.getKeyCode()) {
+            case KeyEvent.VK_DOWN:
+                if (selected < options.size() - 1) {
+                    selected++;
+                    setSelected();
+                    setText();
+                }
+                break;
+            case KeyEvent.VK_UP:
+                if (selected > 0) {
+                    selected--;
+                    setSelected();
+                    setText();
+                }
+                break;
+            case KeyEvent.VK_ENTER:
+                switch (selected) {
+                    case 0:
+                        this.dispose();
+                        new View().setVisible(true); // todo : faire marcher le load pour reprendre la partie
+                        break;
+                    case 2:
+                        this.dispose();
+                        new View().setVisible(true);
+                        break;
+                    case 1:
+                        System.exit(0);
+                        break;
+                }
+                break;
+        }
+    }
+    public void setSelected(){
+        for (String s: options){
+            if (s.charAt(0) == '[' && s.charAt(s.length() - 1) == ']'){
+                options.set(options.indexOf(s), s.substring(1, s.length() - 1));
             }
-        } else if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
-            if (selected == 0) {
-                selected = 1;
-                jTextArea1.setText("Resume\n[Quit]");
-            } else {
-                selected = 0;
-                jTextArea1.setText("[Resume]\nQuit");
-            }
-        } else if (evt.getKeyCode() == KeyEvent.VK_ENTER) {
-            if (selected == 0) {
-                this.dispose();
-            } else {
-                System.exit(0);
-            }
+        }
+        options.set(selected, "[" + options.get(selected) + "]");
+    }
+    public void setText(){
+        jTextArea1.setText("");
+        for (String s : options) {
+            jTextArea1.append(s + "\n");
         }
     }
 }

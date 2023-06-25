@@ -4,6 +4,9 @@ import java.util.*;
 import javax.swing.*;
 
 public class View extends JFrame{
+    static ArrayList<Items> attackItemList = new ArrayList<Items>();
+    static ArrayList<Items> healItemList = new ArrayList<Items>();
+    static ArrayList<Monster> monsterList = new ArrayList<Monster>();
 
     private Map map = new Map(View.this);
 
@@ -111,8 +114,15 @@ public class View extends JFrame{
         // la touche echap est appuyée
         else if(keyCode == KeyEvent.VK_ESCAPE){
             Pause pause = new Pause();
+            Save.savefile(map);
             pause.setVisible(true);
             this.dispose();
+        }// si la touche s est appuyée
+        else if(evt.getKeyCode() == 83){
+            Save.savefile(map);
+        } else if(evt.getKeyCode() == 76){
+            map = Save.fetchSaveFile();
+            jTextArea1.setText(map.toString());
         }
 
         else if(keyCode == KeyEvent.VK_R){
@@ -134,29 +144,9 @@ public class View extends JFrame{
         });
     }
 
-
-    /*public boolean fetchSaveFile(){
-        String filePath = "savefile.txt";
-        Path path = Paths.get(filePath);
-
-        if (!Files.exists(path)) {
-           return false; 
-        }
-
-        try {
-            for (String line : Files.readAllLines(path)) {
-                System.out.println(line);
-            }
-
-        } catch (IOException e) {
-            return false;
-        }
-    }*/
-
     private void startMonsterTimer(){
         java.util.Timer timer = new java.util.Timer();
         int delay = 500; // milliseconds
-
         timer.scheduleAtFixedRate(new TimerTask() {
             @Override
             public void run() {
@@ -190,4 +180,3 @@ public class View extends JFrame{
 
 
 }
-
