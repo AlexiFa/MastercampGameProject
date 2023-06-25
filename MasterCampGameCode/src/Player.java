@@ -52,8 +52,14 @@ public class Player extends Entity{
         }
     }
 
-    public void addToInventory(Items item){
-        this.inventory.add(item);
+
+
+    public boolean addToInventory(Items item) {
+        if (inventory.size() < 10) {
+            inventory.add(item);
+            return true;
+        }
+        return false;
     }
     public void removeFromInventory(Items item){
         this.inventory.remove(item);

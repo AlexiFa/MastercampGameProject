@@ -11,20 +11,26 @@ public class Map {
     private char[][][] map;
     private Player player;
     private ArrayList<Items> arme = new ArrayList<Items>();
-    private Items potion;
+    private ArrayList<Items> potion = new ArrayList<Items>();
+    private View view;
 
+    private Items item;
     private Random rand = new Random();
 
     private Monster monster;
 
-    public Map() {
+    public Map(View view) {
         player = new Player(100, "Hero");
+
+        this.view = view;
 
         arme.add(new Items(rand.nextInt(100 - 20 + 1) + 20, "Epee", false));
         arme.add(new Items(rand.nextInt(100 - 20 + 1) + 20, "Hache", false));
         arme.add(new Items(rand.nextInt(100 - 20 + 1) + 20, "Dague", false));
 
-        potion = new Items(rand.nextInt(50 - 10 + 1) + 10, "Potion", true);
+        potion.add(new Items(rand.nextInt(50 - 10 + 1) + 10, "Potion", true));
+        potion.add(new Items(rand.nextInt(50 - 10 + 1) + 10, "Potion", true));
+        potion.add(new Items(rand.nextInt(50 - 10 + 1) + 10, "Potion", true));
 
         monster = new Monster(100, 1, 120, "monstre");
 
@@ -67,6 +73,7 @@ public class Map {
         int[] deplacements = player.move(direction);
         int dx = deplacements[0];
         int dy = deplacements[1];
+        int reponse= 0;
 
         if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '0' )
         {
@@ -76,24 +83,16 @@ public class Map {
         if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '*')
         {
             map[0][player.getPosition().x + dx][player.getPosition().y + dy] = ' ';
-            player.addToInventory(potion);
-            System.out.println("Vous avez trouvé une potion");
-            System.out.println(potion.getValue());
-
-
+            item = potion.get(rand.nextInt(potion.size()));
+            view.showMessageBox("Vous avez trouvé une potion: " + item.getName() + " d'une valeur de " + item.getValue() );
         }
 
         if(map[0][player.getPosition().x + dx][player.getPosition().y + dy] == 'A')
         {
             map[0][player.getPosition().x + dx][player.getPosition().y + dy] = ' ';
-            player.addToInventory(arme.get(rand.nextInt(arme.size())));
-            System.out.println("Vous avez trouvé une arme");
-            System.out.println(arme.get(rand.nextInt(arme.size())).getValue());
-
+            item = arme.get(rand.nextInt(arme.size()));
+            view.showMessageBox("Vous avez trouvé une arme: " + item.getName() + " d'une valeur de " + item.getValue() );
         }
-
-        
-
 
         //Si le joueur passe sur la porte, une nouvelle room est créée
         if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '>')
@@ -133,6 +132,10 @@ public class Map {
         }
     }
 
+    public Items getItem() {
+        return item;
+    }
+
     @Override
     public String toString()
     {
@@ -159,6 +162,7 @@ public class Map {
                     out += ' ';
                     map[1][x][y] = ' ';
                 }
+
                 else
                 {
                     out += map[0][x][y];
@@ -170,17 +174,24 @@ public class Map {
         return out;
     }
 
+
     public static void main(String[] args)
     {
+        View view = new View();
+        Map map = new Map(view);
 
-        Map map = new Map();
         System.out.println(map.toString());
         Scanner sc = new Scanner(System.in);
+
+
+
         while (true) {
             int direction = sc.nextInt();
             map.move(direction);
             System.out.println(map.toString());
         }
+
+
     }
 
 }

@@ -5,15 +5,21 @@ import javax.swing.*;
 
 public class View extends JFrame{
 
-    private Map map = new Map();
+    private Map map = new Map(View.this);
 
+
+    private Inventory inventory = new Inventory(5, 5, 5);
     private JScrollPane jScrollPane1;
     private JTextArea jTextArea1;
+    private JTextArea jTextArea2;
+    private int result;
     public View(){
         initComponents();
         setTitle("Interface Jeu");
         setLocationRelativeTo(null);
         jTextArea1.setText(map.toString());
+        updateInventory();
+
 
         startMonsterTimer(); // Start the monster timer
     }
@@ -27,6 +33,7 @@ public class View extends JFrame{
 
         //Zone de texte
         jTextArea1 = new JTextArea();
+        jTextArea2 = new JTextArea();
 
 
         //Lorsque l'on ferme la fenêtre
@@ -44,21 +51,54 @@ public class View extends JFrame{
         });
         jScrollPane1.setViewportView(jTextArea1);
 
+        jTextArea2.setColumns(9);
+        jTextArea2.setRows(9);
+        jTextArea2.setFont(new Font("Courier New", 1, 15));
+        jTextArea2.setForeground(Color.WHITE);
+        jTextArea2.setBackground(Color.BLACK);
+        jTextArea2.setEditable(false);
+
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 725, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextArea2, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 725, GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextArea2, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         pack();
     }
+
+    public void showMessageBox(String message) {
+        UIManager.put("OptionPane.background", Color.WHITE);
+        UIManager.put("OptionPane.messageForeground", Color.BLACK);
+        UIManager.put("OptionPane.messageFont", new Font(Font.MONOSPACED, Font.PLAIN, 12));
+        UIManager.put("Button.background", Color.BLACK);
+
+
+
+        result = JOptionPane.showConfirmDialog(this, message, "ScreenPreview", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
+
+        if(result == JOptionPane.YES_OPTION) {
+
+            boolean added = inventory.addItem(map.getItem());
+            if (added) {
+                updateInventory(); // Mettre à jour l'affichage de l'inventaire
+                jTextArea1.setText(map.toString());
+            } else {
+                JOptionPane.showMessageDialog(this, "L'inventaire est plein.", "Inventaire plein", JOptionPane.ERROR_MESSAGE);
+            }
+        }
+
+    }
+
 
 
     private void jTextArea1KeyPressed(KeyEvent evt) {
@@ -74,11 +114,21 @@ public class View extends JFrame{
             pause.setVisible(true);
             this.dispose();
         }
+
+        else if(keyCode == KeyEvent.VK_R){
+            map = new Map(View.this);
+            jTextArea1.setText(map.toString());
+        }
+
+
+
     }
+
 
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
+
                 new View().setVisible(true);
             }
         });
@@ -117,5 +167,27 @@ public class View extends JFrame{
             }
         }, delay, delay);
     }
+
+
+
+    private void updateInventory() {
+        StringBuilder inventoryText = new StringBuilder();
+        inventoryText.append("Inventory:\n");
+
+        int itemCount = Math.min(inventory.getCapacity(), inventory.getRows() * inventory.getCols());
+
+        for (int i = 0; i < itemCount; i++) {
+            Items item = inventory.getItem(i);
+            if (item != null) {
+                inventoryText.append(item.getName()).append(" - Valeur : ").append(item.getValue()).append("\n");
+            } else {
+                inventoryText.append("-\n");
+            }
+        }
+
+        jTextArea2.setText(inventoryText.toString());
+    }
+
+
 }
 
