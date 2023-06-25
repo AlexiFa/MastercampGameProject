@@ -12,8 +12,8 @@ public class Pause extends JFrame{
         initComponents();
         setTitle("Interface Jeu");
         setLocationRelativeTo(null);
-        options.add("[Resume]");
-        options.add("Restart");
+        //options.add("[Resume]");
+        options.add("[Restart]");
         options.add("Quit");
         selected = 0;
         setText();
@@ -70,11 +70,11 @@ public class Pause extends JFrame{
                         this.dispose();
                         new View().setVisible(true); // todo : faire marcher le load pour reprendre la partie
                         break;
-                    case 1:
+                    case 2:
                         this.dispose();
                         new View().setVisible(true);
                         break;
-                    case 2:
+                    case 1:
                         System.exit(0);
                         break;
                 }
