@@ -4,7 +4,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
 public class Map {
+    public void addArme(Items arme) {
+        this.arme.add(arme);
+    }
 
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
+    public void addPotion(Items potion) {
+        this.potion.add(potion);
+    }
 
     private char[][] room1;
     private MapGenerator m1;
@@ -25,6 +35,10 @@ public class Map {
         return monster;
     }
 
+    public void addMonster(Monster monster) {
+        this.monster.add(monster);
+    }
+
     public Map() {
         player = new Player(100, "Hero");
 
@@ -42,6 +56,9 @@ public class Map {
         init(player);
     }
 
+    public void setRoom(char[][] room) {
+        this.room1 = room;
+    }
 
 
 
