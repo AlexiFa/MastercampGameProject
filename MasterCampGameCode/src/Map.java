@@ -53,7 +53,7 @@ public class Map {
         m1 = new MapGenerator();
         room1 = m1.getMap();
         map = new char[2][m1.getSizeY()][m1.getSizeX()];
-        init(player);
+        init();
     }
 
     public void setRoom(char[][] room) {
@@ -63,7 +63,7 @@ public class Map {
 
 
     // initialisation de la map et la position du joueur
-    private void init(Player p) {
+    private void init() {
         int y = 0;
         //Parcourt chaque ligne et chaque charactère de la room
         for (int i = 0; i < room1.length; i++) {
@@ -75,12 +75,15 @@ public class Map {
                 if (charactere == 'H') {
                     player.setPosition(new Point(x, y));
                 }
+                if (charactere == 'M') {
+                    monster.setPosition(new Point(x, y));
+                }
             }
             y++;
         }
         //remplace charactère position du joueur par un espace
         map[1][player.getPosition().x][player.getPosition().y] = ' ';
-
+        map[1][monster.getPosition().x][monster.getPosition().y] = ' ';
     }
 
     public ArrayList<Items> getPotion() {
@@ -106,7 +109,9 @@ public class Map {
         if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '*')
         {
             map[0][player.getPosition().x + dx][player.getPosition().y + dy] = ' ';
+
             player.addToInventory(potion.get(0));
+
             System.out.println("Vous avez trouvé une potion");
             System.out.println(potion.get(0).getValue());
 
@@ -125,13 +130,13 @@ public class Map {
         
 
 
-        //Si le joueur passe sur la porte D une nouvelle room est créée
+        //Si le joueur passe sur la porte, une nouvelle room est créée
         if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '>')
         {
             m1 = new MapGenerator();
             room1 = m1.getMap();
             map = new char[2][m1.getSizeY()][m1.getSizeX()];
-            init(player);
+            init();
         }
 
         if ( map[1][player.getPosition().x + dx][player.getPosition().y + dy] != 'M' && map[0][player.getPosition().x + dx][player.getPosition().y + dy] != '#' )
@@ -150,6 +155,19 @@ public class Map {
 
     }
 
+    public void moveMonster(int direction){
+        int[] deplacements = monster.move(direction);
+        int dx = deplacements[0];
+        int dy = deplacements[1];
+
+        if (map[0][monster.getPosition().x + dx][monster.getPosition().y + dy] != '#' )
+        {
+            int tempx = monster.getPosition().x += dx;
+            int tempy = monster.getPosition().y += dy;
+            monster.setPosition(new Point(tempx, tempy));
+        }
+    }
+
     @Override
     public String toString()
     {
@@ -163,6 +181,9 @@ public class Map {
                 if (player.getPosition().x == x && player.getPosition().y == y)
                 {
                     out += ('H');
+                }
+                else if(monster.getPosition().x == x && monster.getPosition().y == y){
+                    out += ('M');
                 }
                 else if ( map[1][x][y] != ' ')
                 {
@@ -190,7 +211,6 @@ public class Map {
         Map map = new Map();
         System.out.println(map.toString());
         Scanner sc = new Scanner(System.in);
-        System.out.println(-71/70);
         while (true) {
             int direction = sc.nextInt();
             map.move(direction);
