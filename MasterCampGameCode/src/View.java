@@ -1,10 +1,5 @@
 import java.awt.*;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 public class View extends javax.swing.JFrame{
 
@@ -19,8 +14,6 @@ public class View extends javax.swing.JFrame{
         jTextArea1.setText(map.toString());
 
     }
-
-
 
 
     private void initComponents(){
@@ -67,12 +60,24 @@ public class View extends javax.swing.JFrame{
 
     private void jTextArea1KeyPressed(java.awt.event.KeyEvent evt) {
         map.move(evt.getKeyCode());
+        Random rand = new Random();
+        int n = rand.nextInt(4);
+        map.moveMonster(n);
         jTextArea1.setText(map.toString());
     }
 
     public static void main(String[] args) {
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
+                /*Robot robot = null;
+                try {
+                    robot = new Robot();
+                } catch (AWTException e) {
+                    throw new RuntimeException(e);
+                }
+                int mouseButton = InputEvent.BUTTON1_DOWN_MASK;
+                robot.mousePress(mouseButton);
+                robot.mouseRelease(mouseButton);*/
 
                 new View().setVisible(true);
             }
@@ -80,7 +85,7 @@ public class View extends javax.swing.JFrame{
     }
 
 
-    public boolean fetchSaveFile(){
+    /*public boolean fetchSaveFile(){
         String filePath = "savefile.txt";
         Path path = Paths.get(filePath);
 
@@ -96,7 +101,7 @@ public class View extends javax.swing.JFrame{
         } catch (IOException e) {
             return false;
         }
-    }
+    }*/
 
 }
 
