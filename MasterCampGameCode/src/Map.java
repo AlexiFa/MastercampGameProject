@@ -48,13 +48,13 @@ public class Map {
                 map[1 - charactere / 70][x][y] = ' ';
                 //determine la position du joueur
                 if (charactere == 'H') {
-                    player.setPlayerPosition(new Point(x, y));
+                    player.setPosition(new Point(x, y));
                 }
             }
             y++;
         }
         //remplace charactère position du joueur par un espace
-        map[1][player.getPlayerPosition().x][player.getPlayerPosition().y] = ' ';
+        map[1][player.getPosition().x][player.getPosition().y] = ' ';
 
     }
 
@@ -65,14 +65,14 @@ public class Map {
         int dx = deplacements[0];
         int dy = deplacements[1];
 
-        if (map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == '0' )
+        if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '0' )
         {
-            map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] = ' ';
+            map[0][player.getPosition().x + dx][player.getPosition().y + dy] = ' ';
         }
 
-        if (map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == '*')
+        if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '*')
         {
-            map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] = ' ';
+            map[0][player.getPosition().x + dx][player.getPosition().y + dy] = ' ';
             player.addToInventory(potion);
             System.out.println("Vous avez trouvé une potion");
             System.out.println(potion.getValue());
@@ -80,9 +80,9 @@ public class Map {
 
         }
 
-        if(map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == 'A')
+        if(map[0][player.getPosition().x + dx][player.getPosition().y + dy] == 'A')
         {
-            map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] = ' ';
+            map[0][player.getPosition().x + dx][player.getPosition().y + dy] = ' ';
             player.addToInventory(arme.get(rand.nextInt(arme.size())));
             System.out.println("Vous avez trouvé une arme");
             System.out.println(arme.get(rand.nextInt(arme.size())).getValue());
@@ -93,7 +93,7 @@ public class Map {
 
 
         //Si le joueur passe sur la porte D une nouvelle room est créée
-        if (map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == '>')
+        if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '>')
         {
             m1 = new MapGenerator();
             room1 = m1.getMap();
@@ -101,14 +101,14 @@ public class Map {
             init(player);
         }
 
-        if ( map[1][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] != 'M' && map[0][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] != '#' )
+        if ( map[1][player.getPosition().x + dx][player.getPosition().y + dy] != 'M' && map[0][player.getPosition().x + dx][player.getPosition().y + dy] != '#' )
              {
-                 int tempx = player.getPlayerPosition().x += dx;
-                 int tempy = player.getPlayerPosition().y += dy;
-                 player.setPlayerPosition(new Point(tempx, tempy));
+                 int tempx = player.getPosition().x += dx;
+                 int tempy = player.getPosition().y += dy;
+                 player.setPosition(new Point(tempx, tempy));
         }
 
-         if (map[1][player.getPlayerPosition().x + dx][player.getPlayerPosition().y + dy] == 'M')
+         if (map[1][player.getPosition().x + dx][player.getPosition().y + dy] == 'M')
         {
             player.setHp(player.getHp() - monster.getDamage());
             System.out.println("Monster damage " + monster.getDamage());
@@ -127,7 +127,7 @@ public class Map {
             for(int x=0; x< map[0].length; x++)
             {
                 //si la position du joueur est égale à la position du charactère, affiche H
-                if (player.getPlayerPosition().x == x && player.getPlayerPosition().y == y)
+                if (player.getPosition().x == x && player.getPosition().y == y)
                 {
                     out += ('H');
                 }
