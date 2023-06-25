@@ -78,6 +78,9 @@ public class View extends JFrame{
         }// si la touche s est appuyée
         else if(evt.getKeyCode() == 83){
             Save.savefile(map);
+        } else if(evt.getKeyCode() == 76){
+            map = Save.fetchSaveFile();
+            jTextArea1.setText(map.toString());
         }
     }
 

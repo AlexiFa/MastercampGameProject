@@ -12,7 +12,7 @@ public class Save {
         Player n = m.getPlayer();
         ArrayList<Items> attackItemList = m.getArme();
         ArrayList<Items> healItemList = m.getPotion();
-        ArrayList<Monster> monsters = m.getMonster();
+        Monster monster = m.getMonster();
 
         String fileName = "savefile.txt";
         String playerData = n.toString();
@@ -20,9 +20,7 @@ public class Save {
         String mapData = "Map:\n" + m.toString();
 
         String monsterData = "Monsters:\n";
-        for(int i = 0; i < monsters.size(); i++){
-            monsterData += monsters.get(i).toString() + "\n";
-        }
+        monsterData += monster.toString() + "\n";
 
         String attackItemData = "AttackItem:\n";
         for (int i = 0; i < attackItemList.size(); i++){
@@ -57,7 +55,7 @@ public class Save {
         }
     }
 
-    public Map fetchSaveFile(){
+    public static Map fetchSaveFile(){
         Map savedMap = new Map();
         String filePath = "savefile.txt";
         Path path = Paths.get(filePath);
@@ -241,9 +239,7 @@ public class Save {
             Point monsterPoint3 = new Point(monsterX, monsterY);
             monster3.setPosition(monsterPoint3);
 
-            savedMap.addMonster(monster1);
-            savedMap.addMonster(monster2);
-            savedMap.addMonster(monster3);
+            savedMap.setMonster(monster1);
 
             View.monsterList.add(monster1);
             View.monsterList.add(monster2);
