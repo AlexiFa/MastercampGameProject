@@ -1,21 +1,23 @@
 import java.io.*;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Save {
-    public static void savefile(Map m, ArrayList<Monster> monsters, ArrayList<Items> attackItemList, ArrayList<Items> healItemList){
+    public static void savefile(Map m){
         Player n = m.getPlayer();
+        ArrayList<Items> attackItemList = m.getArme();
+        ArrayList<Items> healItemList = m.getPotion();
+        ArrayList<Monster> monsters = m.getMonster();
+
         String fileName = "savefile.txt";
         String playerData = n.toString();
         
         String mapData = "Map:\n" + m.toString();
 
-        String monsterData =
-        "Monsters:\n" + 
-        monsters.get(0).toString() +
-        "\n" +
-        monsters.get(1).toString() +
-        "\n" +
-        monsters.get(2).toString();
+        String monsterData = "Monsters:\n";
+        for(int i = 0; i < monsters.size(); i++){
+            monsterData += monsters.get(i).toString() + "\n";
+        }
 
         String attackItemData = "AttackItem:\n";
         for (int i = 0; i < attackItemList.size(); i++){

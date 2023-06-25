@@ -11,14 +11,18 @@ public class Map {
     private char[][][] map;
     private Player player;
     private ArrayList<Items> arme = new ArrayList<Items>();
-    private Items potion;
+    private ArrayList<Items> potion = new ArrayList<Items>();
 
     private Random rand = new Random();
 
-    private Monster monster;
+    private ArrayList<Monster> monster = new ArrayList<Monster>();
 
     public Player getPlayer() {
         return player;
+    }
+
+    public ArrayList<Monster> getMonster() {
+        return monster;
     }
 
     public Map() {
@@ -28,9 +32,9 @@ public class Map {
         arme.add(new Items(rand.nextInt(100 - 20 + 1) + 20, "Hache", false));
         arme.add(new Items(rand.nextInt(100 - 20 + 1) + 20, "Dague", false));
 
-        potion = new Items(rand.nextInt(50 - 10 + 1) + 10, "Potion", true);
+        potion.add(new Items(rand.nextInt(50 - 10 + 1) + 10, "Potion", true));
 
-        monster = new Monster(100, 1, 120, "monstre");
+        monster.add(new Monster(100, 1, 120, "monstre"));
 
         m1 = new MapGenerator();
         room1 = m1.getMap();
@@ -62,6 +66,14 @@ public class Map {
 
     }
 
+    public ArrayList<Items> getPotion() {
+        return potion;
+    }
+
+    public ArrayList<Items> getArme() {
+        return arme;
+    }
+
     //deplacement du joueur dans la room
     public void move(int direction)
     {
@@ -77,9 +89,9 @@ public class Map {
         if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '*')
         {
             map[0][player.getPosition().x + dx][player.getPosition().y + dy] = ' ';
-            player.addToInventory(potion);
+            player.addToInventory(potion.get(0));
             System.out.println("Vous avez trouvé une potion");
-            System.out.println(potion.getValue());
+            System.out.println(potion.get(0).getValue());
 
 
         }
@@ -114,8 +126,8 @@ public class Map {
 
          if (map[1][player.getPosition().x + dx][player.getPosition().y + dy] == 'M')
         {
-            player.setHp(player.getHp() - monster.getDamage());
-            System.out.println("Monster damage " + monster.getDamage());
+            player.setHp(player.getHp() - monster.get(0).getDamage());
+            System.out.println("Monster damage " + monster.get(0).getDamage());
             System.out.println("Player HP " + player.getHp() );
         }
 

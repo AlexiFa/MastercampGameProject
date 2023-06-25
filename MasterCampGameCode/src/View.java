@@ -73,7 +73,7 @@ public class View extends javax.swing.JFrame{
         }
         // si la touche s est appuyée
         if(evt.getKeyCode() == 83){
-
+            Save.savefile(map);
         }
     }
 

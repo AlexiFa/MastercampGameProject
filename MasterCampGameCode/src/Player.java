@@ -88,7 +88,7 @@ public class Player extends Entity{
             playerString += this.getInventory().get(i).getName() + " ";
         }
         playerString += "\n" +
-        this.getSelectedItem().getName() + "\n" +
+        (this.getSelectedItem() == null ? "none" : this.getSelectedItem().getName()) + "\n" +
         this.getPosition().x + "," + this.getPosition().y + "\n" +
         this.getLevel();
 
