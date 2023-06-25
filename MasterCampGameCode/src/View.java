@@ -68,6 +68,12 @@ public class View extends JFrame{
             map.move(evt.getKeyCode());
             jTextArea1.setText(map.toString());
         }
+        // la touche echap est appuyée
+        else if(keyCode == KeyEvent.VK_ESCAPE){
+            Pause pause = new Pause();
+            pause.setVisible(true);
+            this.dispose();
+        }
     }
 
     public static void main(String[] args) {
