@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class MapGenerator {
     private char[][] map;
     private int sizeX, sizeY; // X is the number of lines, Y is the number of columns
@@ -94,8 +96,11 @@ public class MapGenerator {
             }
             this.map[2][2] = 'H';
             this.map[x - 3][y - 3] = '>';
-            this.map[8][2] = 'M';
         }
+        Random random = new Random();
+        int xM = random.nextInt(20) + 1;
+        int yM = random.nextInt(78) + 1;
+        this.map[xM][yM] = 'M';
     }
 
     public void printMap(){
