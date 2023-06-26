@@ -14,6 +14,8 @@ public class View extends JFrame{
     private JTextArea jTextArea1;
     private Items selectedItem;
     private JTextArea jTextArea2;
+
+    private JTextArea jTextArea3;
     private int result;
     public View(){
         initComponents();
@@ -35,7 +37,7 @@ public class View extends JFrame{
         //Zone de texte
         jTextArea1 = new JTextArea();
         jTextArea2 = new JTextArea();
-
+        jTextArea3 = new JTextArea();
 
         //Lorsque l'on ferme la fenêtre
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
@@ -54,7 +56,14 @@ public class View extends JFrame{
 
         jTextArea2.setColumns(9);
         jTextArea2.setRows(9);
-        jTextArea2.setFont(new Font("Courier New", 1, 15));
+        jTextArea2.setFont(new Font("Courier New", 1, 12));
+        jTextArea2.setForeground(Color.WHITE);
+        jTextArea2.setBackground(Color.BLACK);
+        jTextArea2.setEditable(false);
+
+        jTextArea2.setColumns(9);
+        jTextArea2.setRows(9);
+        jTextArea2.setFont(new Font("Courier New", 1,10 ));
         jTextArea2.setForeground(Color.WHITE);
         jTextArea2.setBackground(Color.BLACK);
         jTextArea2.setEditable(false);
@@ -65,12 +74,14 @@ public class View extends JFrame{
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 725, GroupLayout.PREFERRED_SIZE)
                         .addComponent(jTextArea2, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 725, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTextArea3, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 725, GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
                                 .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 418, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextArea2, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jTextArea3, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -154,7 +165,10 @@ public class View extends JFrame{
     }
 
 
+    private void JTextArea3(String message) {
+        jTextArea3.setText(message);
 
+    }
 
     private void jTextArea1KeyPressed(KeyEvent evt) {
         int keyCode = evt.getKeyCode();
@@ -216,6 +230,7 @@ public class View extends JFrame{
     private void updateInventory() {
         StringBuilder inventoryText = new StringBuilder();
         inventoryText.append("Inventory:\n");
+
 
         int itemCount = Math.min(inventory.getCapacity(), inventory.getRows() * inventory.getCols());
 
