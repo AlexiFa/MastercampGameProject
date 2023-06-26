@@ -56,14 +56,14 @@ public class View extends JFrame{
 
         jTextArea2.setColumns(9);
         jTextArea2.setRows(9);
-        jTextArea2.setFont(new Font("Courier New", 1, 12));
+        jTextArea2.setFont(new Font("Courier New", 1, 15));
         jTextArea2.setForeground(Color.WHITE);
         jTextArea2.setBackground(Color.BLACK);
         jTextArea2.setEditable(false);
 
         jTextArea2.setColumns(9);
         jTextArea2.setRows(9);
-        jTextArea2.setFont(new Font("Courier New", 1,10 ));
+        jTextArea2.setFont(new Font("Courier New", 1,15 ));
         jTextArea2.setForeground(Color.WHITE);
         jTextArea2.setBackground(Color.BLACK);
         jTextArea2.setEditable(false);
@@ -165,7 +165,7 @@ public class View extends JFrame{
     }
 
 
-    private void JTextArea3(String message) {
+    public void JTextArea3(String message) {
         jTextArea3.setText(message);
 
     }

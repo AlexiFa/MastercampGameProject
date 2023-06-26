@@ -70,14 +70,15 @@ public class Map {
         map[1][monster.getPosition().x][monster.getPosition().y] = ' ';
     }
 
-    //view.JTextArea3("Vous êtes dans la salle 1");
+
     //deplacement du joueur dans la room
     public void move(int direction)
     {
         int[] deplacements = player.move(direction);
         int dx = deplacements[0];
         int dy = deplacements[1];
-        int reponse= 0;
+
+
 
         if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '0' )
         {
@@ -117,31 +118,37 @@ public class Map {
         if(player.getPosition().x == monster.getPosition().x && player.getPosition().y == monster.getPosition().y){
             view.showMessage("Vous avez rencontré un monstre, choisissez une arme pour l'attaquer" + "\nMonstre : HP " + monster.getHp() + " Damage " + monster.getDamage());
 
+            System.out.println("Monster" + monster.getHp());
+            System.out.println("Player" + player.getHp());
 
             if(view.getSelectedItems().getValue() < monster.getHp() && !view.getSelectedItems().getType()){
                 monster.setHp(monster.getHp() - view.getSelectedItems().getValue());
                 player.setHp(player.getHp() - monster.getDamage());
 
+                System.out.println("Monster" + monster.getHp());
+                System.out.println("Player" + player.getHp());
+
 
                 if(player.getHp() <= 0){
                     view.showMessage("Vous êtes mort");
                     System.exit(0);
-                }else if(monster.getHp() <= 0){
+                }
+                else if(monster.getHp() <= 0){
                     view.showMessage("Vous avez tué le monstre");
                     System.out.println(monster.getHp());
                 }
-                System.exit(0);
+
             }
             else if(view.getSelectedItems().getValue() < monster.getHp() && view.getSelectedItems().getType()){
                 player.setHp(player.getHp() + view.getSelectedItems().getValue());
                 if(player.getHp() > 100){
                     player.setHp(100);
                 }
-                System.exit(0);
+
             } else if (view.getSelectedItems().getValue() >= monster.getHp()) {
                 view.showMessage("Vous avez tué le monstre");
                 System.out.println(monster.getHp());
-                System.exit(0);
+
             }
         }
 
