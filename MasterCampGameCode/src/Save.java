@@ -9,6 +9,7 @@ import java.util.List;
 
 public class Save {
     public static void savefile(Map m){
+
         Player n = m.getPlayer();
         ArrayList<Items> attackItemList = m.getArme();
         ArrayList<Items> healItemList = m.getPotion();
@@ -56,12 +57,12 @@ public class Save {
     }
 
     public static Map fetchSaveFile(){
-        Map savedMap = new Map();
+        Map savedMap = new Map(new View());
         String filePath = "savefile.txt";
         Path path = Paths.get(filePath);
 
         if (!Files.exists(path)) {
-            return new Map();
+            return new Map(new View());
         }
 
         try {
@@ -262,7 +263,7 @@ public class Save {
 
         } catch (IOException e) {
             System.out.println("Erreur lors de la lecture du fichier");
-            return new Map();
+            return new Map(new View());
         }
     }
 }

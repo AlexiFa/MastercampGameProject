@@ -85,13 +85,9 @@ public class Map {
 
         if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '*')
         {
-           
-
             map[0][player.getPosition().x + dx][player.getPosition().y + dy] = ' ';
             item = potion.get(rand.nextInt(arme.size()));
             view.showMessageBox("Vous avez trouvé une potion: " + item.getName() + " d'une valeur de " + item.getValue() );
-
-
         }
 
         if(map[0][player.getPosition().x + dx][player.getPosition().y + dy] == 'A')
@@ -117,7 +113,7 @@ public class Map {
                  player.setPosition(new Point(tempx, tempy));
         }
 
-         if (map[1][player.getPosition().x + dx][player.getPosition().y + dy] == 'M')
+         if (map[1][player.getPosition().x + dx][player.getPosition().y + dy] == map[1][monster.getPosition().x][monster.getPosition().y] )
         {
             player.setHp(player.getHp() - monster.getDamage());
             System.out.println("Monster damage " + monster.getDamage());
@@ -196,6 +192,10 @@ public class Map {
         }
 
 
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
     public ArrayList<Items> getPotion() {
         return potion;
