@@ -1,10 +1,12 @@
 
+import javax.swing.*;
 import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
 import java.util.List;
 public class Map {
+    public static int niveau = 1;
     private char[][] room1;
     private MapGenerator m1;
     private char[][][] map;
@@ -101,6 +103,12 @@ public class Map {
         //Si le joueur passe sur la porte, une nouvelle room est créée
         if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '>')
         {
+            if(niveau == 4){
+                // messagebox de victoire
+                JOptionPane.showMessageDialog(null, "Vous avez gagné !", "Victoire", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
+            }
+            niveau++;
             m1 = new MapGenerator();
             room1 = m1.getMap();
             map = new char[2][m1.getSizeY()][m1.getSizeX()];
