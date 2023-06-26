@@ -6,13 +6,20 @@ public class Menu extends JFrame{
     private JScrollPane jScrollPane1;
     private JTextArea jTextArea1;
     private int selected;
+    private String titre = "\n   ######   #####   ##       ## ###### ##     # ####### ##     ## ######  ######\n"
+            + "       ##  #     #  ##       ## ##     ###    #    ##   ##     ## ##    # ##    \n"
+            + "       ## #       #  ##     ##  #####  ## #   #    ##   ##     ## ##    # ##### \n"
+            + "       ## #########   ##   ##   ##     ##  #  #    ##   ##     ## ######  ##    \n"
+            + " #     ## #       #    ## ##    ##     ##   # #    ##   ##     ## ##   #  ##    \n"
+            + "  ######  #       #     ###     ###### ##    ##    ##    #######  ##    # ######\n\n\n";
 
     public Menu(){
         initComponents();
         setTitle("Interface Jeu");
         setLocationRelativeTo(null);
+        jTextArea1.setText(titre);
         // creation du menu avec start et quit
-        jTextArea1.setText("[Start]\nQuit");
+        jTextArea1.append("\t\t\t\t[Start]\n\n\t\t\t\tQuit");
         selected = 0;
     }
 
@@ -36,10 +43,10 @@ public class Menu extends JFrame{
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(jScrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 725, GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(jScrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 715, GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE).addGap(0, 0, Short.MAX_VALUE))
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 250, GroupLayout.PREFERRED_SIZE).addGap(0, 0, Short.MAX_VALUE))
         );
         pack();
     }
@@ -51,7 +58,8 @@ public class Menu extends JFrame{
             // si on est sur start
             if(selected == 0){
                 // on passe sur quit
-                jTextArea1.setText("Start\n[Quit]");
+                jTextArea1.setText(titre);
+                jTextArea1.append("\t\t\t\tStart\n\n\t\t\t\t[Quit]");
                 selected = 1;
             }
         }
@@ -60,7 +68,8 @@ public class Menu extends JFrame{
             // si on est sur quit
             if(selected == 1){
                 // on passe sur start
-                jTextArea1.setText("[Start]\nQuit");
+                jTextArea1.setText(titre);
+                jTextArea1.append("\t\t\t\t[Start]\n\n\t\t\t\tQuit");
                 selected = 0;
             }
         }
