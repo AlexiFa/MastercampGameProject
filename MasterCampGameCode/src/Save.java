@@ -93,29 +93,28 @@ public class Save {
                         i = 4;
                         break;
                     default:
-                        break;
-                }
-                switch(i){
-                    case 0:
-                        playerLines.add(line);
-                        break;
-                    case 1:
-                        mapLines.add(line);
-                        break;
-                    case 2:
-                        enemyLines.add(line);
-                        break;
-                    case 3:
-                        attackItemLines.add(line);
-                        break;
-                    case 4:
-                        healItemLines.add(line);
-                        break;
-                }
+                        switch(i){
+                            case 0:
+                                playerLines.add(line);
+                                break;
+                            case 1:
+                                mapLines.add(line);
+                                break;
+                            case 2:
+                                enemyLines.add(line);
+                                break;
+                            case 3:
+                                attackItemLines.add(line);
+                                break;
+                            case 4:
+                                healItemLines.add(line);
+                                break;
+                        }
+                    }
             }
             //Items
             for(String line : attackItemLines){
-                if(!line.equals("Item:")){
+                if(!line.equals("Item:") && !line.equals("")){
                     String[] item = line.split(",");
                     int value = Integer.parseInt(item[0].trim());
                     String name = item[1].trim();
@@ -125,7 +124,7 @@ public class Save {
             }
 
             for(String line : healItemLines){
-                if(!line.equals("Item:")){
+                if(!line.equals("Item:") && !line.equals("")){
                     String[] item = line.split(",");
                     int value = Integer.parseInt(item[0].trim());
                     String name = item[1].trim();
@@ -154,20 +153,22 @@ public class Save {
             List<Items> playerItems = new ArrayList<>();
             player.setInventory(playerItems); //vide l'inventaire avant la récup de la sauvegarde au cas où
             for(String item : playerItem){
-                for(Items attackItem : savedMap.getArme()){
-                    if(attackItem.getName().equals(item)){
-                        player.addItem(attackItem);
+                if(!item.equals("")){
+                    for(Items attackItem : savedMap.getArme()){
+                        if(attackItem.getName().equals(item)){
+                            player.addItem(attackItem);
+                        }
                     }
-                }
-                for(Items healItem : savedMap.getPotion()){
-                    if(healItem.getName().equals(item)){
-                        player.addItem(healItem);
+                    for(Items healItem : savedMap.getPotion()){
+                        if(healItem.getName().equals(item)){
+                            player.addItem(healItem);
+                        }
                     }
                 }
             }
 
             for(Items item : player.getInventory()){
-                if(player.getSelectedItem() == null)
+                if(playerSelectedItem == "null")
                     player.setSelectedItem(null);
                 else if(item.getName().equals(playerSelectedItem)){
                     player.setSelectedItem(item);
