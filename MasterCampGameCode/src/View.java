@@ -16,7 +16,7 @@ public class View extends JFrame{
     private int result;
     public View(){
         initComponents();
-        setTitle("Interface Jeu");
+        setTitle("Javenture");
         setLocationRelativeTo(null);
         jTextArea1.setText(map.toString());
         updateInventory();

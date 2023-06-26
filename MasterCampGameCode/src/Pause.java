@@ -10,7 +10,7 @@ public class Pause extends JFrame{
 
     public Pause(){
         initComponents();
-        setTitle("Interface Jeu");
+        setTitle("Pause");
         setLocationRelativeTo(null);
         //options.add("[Resume]");
         options.add("[Restart]");
