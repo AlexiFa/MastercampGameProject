@@ -143,14 +143,16 @@ public class Map {
     }
 
     public void moveMonster(int direction){
-        int[] deplacements = monster.move(direction);
-        int dx = deplacements[0];
-        int dy = deplacements[1];
+        if (monster.getHp() > 0) {
+            int[] deplacements = monster.move(direction);
+            int dx = deplacements[0];
+            int dy = deplacements[1];
 
-        if (map[0][monster.getPosition().x + dx][monster.getPosition().y + dy] != '#' ) {
-            int tempx = monster.getPosition().x += dx;
-            int tempy = monster.getPosition().y += dy;
-            monster.setPosition(new Point(tempx, tempy));
+            if (map[0][monster.getPosition().x + dx][monster.getPosition().y + dy] != '#') {
+                int tempx = monster.getPosition().x += dx;
+                int tempy = monster.getPosition().y += dy;
+                monster.setPosition(new Point(tempx, tempy));
+            }
         }
     }
 
