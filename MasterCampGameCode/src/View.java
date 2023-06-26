@@ -86,7 +86,6 @@ public class View extends JFrame{
         UIManager.put("Button.background", Color.BLACK);
 
 
-
         result = JOptionPane.showConfirmDialog(this, message, "ScreenPreview", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 
         if(result == JOptionPane.YES_OPTION) {

@@ -52,7 +52,20 @@ public class MapGenerator {
             }
         }
         // vertical walls
+
+        int itemCounter = 0;
         for (int i = 0; i < 20; i++) {
+
+            if (itemCounter < 5) {
+                if (Math.random() < 0.5) {
+                    this.map[(int) (Math.random() * (x - 4)) + 2][(int) (Math.random() * (y - 4)) + 2] = '*';
+                    itemCounter++; // Incrémenter le compteur d'éléments
+                } else {
+                    this.map[(int) (Math.random() * (x - 4)) + 2][(int) (Math.random() * (y - 4)) + 2] = 'A';
+                    itemCounter++; // Incrémenter le compteur d'éléments
+                }
+            }
+
             int refVWallY; // reference vertical wall X
             int refVWallX; // reference vertical wall Y
             int lengthVWall; // length of the vertical wall
@@ -81,10 +94,6 @@ public class MapGenerator {
             }
             this.map[2][2] = 'H';
             this.map[x - 3][y - 3] = '>';
-            this.map[5][3] = 'A';
-            this.map[5][6] = 'A';
-            this.map[2][8] = 'A';
-            this.map[1][9] = 'A';
             this.map[8][2] = 'M';
         }
     }

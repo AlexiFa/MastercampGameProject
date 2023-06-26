@@ -113,7 +113,7 @@ public class Map {
                  player.setPosition(new Point(tempx, tempy));
         }
 
-         if (map[1][player.getPosition().x + dx][player.getPosition().y + dy] == map[1][monster.getPosition().x][monster.getPosition().y] )
+         if (map[1][player.getPosition().x + dx][player.getPosition().y + dy] == map[1][monster.getPosition().x + dx][monster.getPosition().y + dy] )
         {
             player.setHp(player.getHp() - monster.getDamage());
             System.out.println("Monster damage " + monster.getDamage());
