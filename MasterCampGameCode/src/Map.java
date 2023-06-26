@@ -128,7 +128,7 @@ public class Map {
 
                 if(monster.getHp() <= 0){
                     view.showMessage("Vous avez tué le monstre");
-                    
+
                 }
             }
             else if(view.getSelectedItems().getValue() < monster.getHp() && view.getSelectedItems().getType()){
