@@ -12,6 +12,7 @@ public class View extends JFrame{
     private Inventory inventory = new Inventory(5, 5, 5);
     private JScrollPane jScrollPane1;
     private JTextArea jTextArea1;
+    private Items selectedItem;
     private JTextArea jTextArea2;
     private int result;
     public View(){
@@ -98,6 +99,7 @@ public class View extends JFrame{
     }
 
 
+
     public void showMessage(String message) {
         jTextArea2.setText(message );
         StringBuilder inventoryText = new StringBuilder();
@@ -115,17 +117,23 @@ public class View extends JFrame{
 
         int choice = askForChoice("Choisissez un élément de votre inventaire : " + "\n Entrez 0 pour quitter.", inventoryItems);
         if (choice >= 1 && choice <= inventoryItems.size()) {
-            Items selectedItem = inventoryItems.get(choice - 1);
+            selectedItem = inventoryItems.get(choice - 1);
+            inventoryItems.remove(choice - 1);
+            updateInventory();
         }
 
     }
-    
+
+    public Items getSelectedItems() {
+        return selectedItem;
+    }
 
 
 
 
      private int askForChoice(String message, List<Items> options) {
         String input = JOptionPane.showInputDialog(this, message);
+
         try {
             int choice = Integer.parseInt(input);
             if (choice >= 1 && choice <= options.size()) {
