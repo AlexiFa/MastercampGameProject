@@ -2,15 +2,13 @@ import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import javax.swing.*;
+import java.util.List;
 
 public class View extends JFrame{
     static ArrayList<Items> attackItemList = new ArrayList<Items>();
     static ArrayList<Items> healItemList = new ArrayList<Items>();
     static ArrayList<Monster> monsterList = new ArrayList<Monster>();
-
     private Map map = new Map(View.this);
-
-
     private Inventory inventory = new Inventory(5, 5, 5);
     private JScrollPane jScrollPane1;
     private JTextArea jTextArea1;
@@ -32,7 +30,6 @@ public class View extends JFrame{
 
         //Zone défilement
         jScrollPane1 = new JScrollPane();
-
 
         //Zone de texte
         jTextArea1 = new JTextArea();
@@ -71,7 +68,7 @@ public class View extends JFrame{
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 418, GroupLayout.PREFERRED_SIZE)
                                 .addComponent(jTextArea2, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -86,9 +83,11 @@ public class View extends JFrame{
         UIManager.put("Button.background", Color.BLACK);
 
 
+
         result = JOptionPane.showConfirmDialog(this, message, "ScreenPreview", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
 
-        if(result == JOptionPane.YES_OPTION) {
+
+        if(result == JOptionPane.YES_OPTION){
 
             boolean added = inventory.addItem(map.getItem());
             if (added) {
@@ -100,6 +99,46 @@ public class View extends JFrame{
         }
 
     }
+
+
+    public void showMessage(String message) {
+        jTextArea2.setText(message );
+        StringBuilder inventoryText = new StringBuilder();
+        inventoryText.append(message).append("\n\n");
+        inventoryText.append("Votre inventaire :\n");
+
+        List<Items> inventoryItems = inventory.getItems();
+
+        for (int i = 0; i < inventoryItems.size(); i++) {
+            Items item = inventoryItems.get(i);
+            inventoryText.append(i + 1).append(". ").append(item.getName()).append(" - Valeur : ").append(item.getValue()).append("\n");
+        }
+
+        jTextArea2.setText(inventoryText.toString());
+
+        int choice = askForChoice("Choisissez un élément de votre inventaire :", inventoryItems);
+        if (choice >= 1 && choice <= inventoryItems.size()) {
+            Items selectedItem = inventoryItems.get(choice - 1);
+
+        }
+    }
+
+    private int askForChoice(String message, List<Items> options) {
+        String input = JOptionPane.showInputDialog(this, message);
+        try {
+            int choice = Integer.parseInt(input);
+            if (choice >= 1 && choice <= options.size()) {
+                return choice;
+            } else {
+                showMessage("Choix invalide. Veuillez réessayer.");
+                return askForChoice(message, options);
+            }
+        } catch (NumberFormatException e) {
+            showMessage("Choix invalide. Veuillez réessayer.");
+            return askForChoice(message, options);
+        }
+    }
+
 
 
 
@@ -156,6 +195,7 @@ public class View extends JFrame{
             }
         }, delay, delay);
     }
+
 
 
 

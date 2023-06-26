@@ -43,6 +43,8 @@ public class Player extends Entity{
         this.inventory.add(item);
     }
 
+
+
     public int getDamage(){
         if (this.selectedItem == null){
             return 1;

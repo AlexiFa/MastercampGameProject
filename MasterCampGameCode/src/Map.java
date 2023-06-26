@@ -3,6 +3,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
+import java.util.List;
 public class Map {
     private char[][] room1;
     private MapGenerator m1;
@@ -11,7 +12,6 @@ public class Map {
     private ArrayList<Items> arme = new ArrayList<Items>();
     private ArrayList<Items> potion = new ArrayList<Items>();
     private View view;
-
     private Items item;
     private Random rand = new Random();
     private Monster monster;
@@ -113,11 +113,10 @@ public class Map {
                  player.setPosition(new Point(tempx, tempy));
         }
 
-         if (map[1][player.getPosition().x + dx][player.getPosition().y + dy] == map[1][monster.getPosition().x + dx][monster.getPosition().y + dy] )
+         if (map[1][player.getPosition().x + dx][player.getPosition().y + dy] == 'M' )
         {
-            player.setHp(player.getHp() - monster.getDamage());
-            System.out.println("Monster damage " + monster.getDamage());
-            System.out.println("Player HP " + player.getHp() );
+           view.showMessage("Vous avez rencontré un monstre, choisissez une arme pour l'attaquer");
+
         }
     }
 

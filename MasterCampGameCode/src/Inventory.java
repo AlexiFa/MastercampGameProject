@@ -6,8 +6,6 @@ public class Inventory {
     private int capacity;
     private List<Items> items;
 
-
-
     public Inventory(int rows, int cols, int capacity) {
         this.rows = rows;
         this.cols = cols;
@@ -35,6 +33,10 @@ public class Inventory {
         return null;
     }
 
+
+    public List<Items> getItems() {
+        return items;
+    }
     public boolean addItem(Items item) {
         if (items.size() < capacity) {
             items.add(item);
@@ -46,9 +48,7 @@ public class Inventory {
 
 
 
-    public void removeItem(Items item) {
-        items.remove(item);
-    }
+
 }
 
 
