@@ -82,10 +82,7 @@ public class View extends JFrame{
         UIManager.put("OptionPane.messageFont", new Font(Font.MONOSPACED, Font.PLAIN, 12));
         UIManager.put("Button.background", Color.BLACK);
 
-
-
         result = JOptionPane.showConfirmDialog(this, message, "ScreenPreview", JOptionPane.YES_NO_OPTION, JOptionPane.PLAIN_MESSAGE);
-
 
         if(result == JOptionPane.YES_OPTION){
 
@@ -116,20 +113,27 @@ public class View extends JFrame{
 
         jTextArea2.setText(inventoryText.toString());
 
-        int choice = askForChoice("Choisissez un élément de votre inventaire :", inventoryItems);
+        int choice = askForChoice("Choisissez un élément de votre inventaire : " + "\n Entrez 0 pour quitter.", inventoryItems);
         if (choice >= 1 && choice <= inventoryItems.size()) {
             Items selectedItem = inventoryItems.get(choice - 1);
-
         }
-    }
 
-    private int askForChoice(String message, List<Items> options) {
+    }
+    
+
+
+
+
+     private int askForChoice(String message, List<Items> options) {
         String input = JOptionPane.showInputDialog(this, message);
         try {
             int choice = Integer.parseInt(input);
             if (choice >= 1 && choice <= options.size()) {
                 return choice;
-            } else {
+            } //fermer la fenêtre
+            else if (choice == 0) {
+                return 0;
+            } else  {
                 showMessage("Choix invalide. Veuillez réessayer.");
                 return askForChoice(message, options);
             }
@@ -137,6 +141,8 @@ public class View extends JFrame{
             showMessage("Choix invalide. Veuillez réessayer.");
             return askForChoice(message, options);
         }
+
+
     }
 
 
