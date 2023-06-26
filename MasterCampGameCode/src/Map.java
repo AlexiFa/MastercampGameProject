@@ -17,7 +17,7 @@ public class Map {
     private Monster monster;
 
     public Map(View view) {
-        player = new Player(6, "Hero");
+        player = new Player(100, "Hero");
 
         this.view = view;
 
@@ -128,15 +128,16 @@ public class Map {
 
                 if(monster.getHp() <= 0){
                     view.showMessage("Vous avez tué le monstre");
-                    map[0][monster.getPosition().x][monster.getPosition().y] = ' ';
+                    
                 }
             }
-
-
-
-
-
-
+            else if(view.getSelectedItems().getValue() < monster.getHp() && view.getSelectedItems().getType()){
+                player.setHp(player.getHp() + view.getSelectedItems().getValue());
+                if(player.getHp() > 100){
+                    player.setHp(100);
+                }
+                System.out.println(player.getHp());
+            }
         }
 
     }
