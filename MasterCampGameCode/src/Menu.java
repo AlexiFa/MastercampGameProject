@@ -15,7 +15,7 @@ public class Menu extends JFrame{
 
     public Menu(){
         initComponents();
-        setTitle("Interface Jeu");
+        setTitle("Menu");
         setLocationRelativeTo(null);
         jTextArea1.setText(titre);
         // creation du menu avec start et quit
