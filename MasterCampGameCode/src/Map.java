@@ -107,17 +107,17 @@ public class Map {
         }
 
         if ( map[1][player.getPosition().x + dx][player.getPosition().y + dy] != 'M' && map[0][player.getPosition().x + dx][player.getPosition().y + dy] != '#' )
-             {
+        {
                  int tempx = player.getPosition().x += dx;
                  int tempy = player.getPosition().y += dy;
                  player.setPosition(new Point(tempx, tempy));
         }
 
-         if (map[1][player.getPosition().x + dx][player.getPosition().y + dy] == 'M' )
-        {
-           view.showMessage("Vous avez rencontré un monstre, choisissez une arme pour l'attaquer");
+        if(player.getPosition().x == monster.getPosition().x && player.getPosition().y == monster.getPosition().y){
+            view.showMessage("Vous avez rencontré un monstre, choisissez une arme pour l'attaquer");
 
         }
+
     }
 
     public void moveMonster(int direction){
