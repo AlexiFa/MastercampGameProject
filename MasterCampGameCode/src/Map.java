@@ -4,7 +4,7 @@ import java.awt.Point;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.Random;
-import java.util.List;
+
 public class Map {
     public static int niveau = 1;
     private char[][] room1;
@@ -31,7 +31,7 @@ public class Map {
         potion.add(new Items(rand.nextInt(50 - 10 + 1) + 10, "Potion", true));
         potion.add(new Items(rand.nextInt(50 - 10 + 1) + 10, "Potion", true));
 
-        monster = new Monster(2, 1, 120, "monstre");
+        monster = new Monster(100, 1, 30, "monstre");
 
         m1 = new MapGenerator();
         room1 = m1.getMap();
@@ -126,8 +126,6 @@ public class Map {
         if(player.getPosition().x == monster.getPosition().x && player.getPosition().y == monster.getPosition().y){
             view.showMessage("Vous avez rencontré un monstre, choisissez une arme pour l'attaquer" + "\nMonstre : HP " + monster.getHp() + " Damage " + monster.getDamage());
 
-            System.out.println("Monster" + monster.getHp());
-            System.out.println("Player" + player.getHp());
 
             if(view.getSelectedItems().getValue() < monster.getHp() && !view.getSelectedItems().getType()){
                 monster.setHp(monster.getHp() - view.getSelectedItems().getValue());
@@ -136,14 +134,12 @@ public class Map {
                 System.out.println("Monster" + monster.getHp());
                 System.out.println("Player" + player.getHp());
 
-
                 if(player.getHp() <= 0){
                     view.showMessage("Vous êtes mort");
                     System.exit(0);
                 }
                 else if(monster.getHp() <= 0){
                     view.showMessage("Vous avez tué le monstre");
-                    System.out.println(monster.getHp());
                 }
 
             }
@@ -155,8 +151,6 @@ public class Map {
 
             } else if (view.getSelectedItems().getValue() >= monster.getHp()) {
                 view.showMessage("Vous avez tué le monstre");
-                System.out.println(monster.getHp());
-
             }
         }
 
