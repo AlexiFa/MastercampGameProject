@@ -15,7 +15,6 @@ public class View extends JFrame{
     private JTextArea jTextArea1;
     private Items selectedItem;
     private JTextArea jTextArea2;
-
     private JTextArea jTextArea3;
     private int result;
     public View(){
@@ -25,6 +24,7 @@ public class View extends JFrame{
         jTextArea1.setText(map.toString());
         updateInventory();
 
+        jTextArea3.setText("Player -- HP : " + map.getPlayer().getHp() + "\nMonster -- HP : " + map.getMonster().getHp());
 
         startMonsterTimer(); // Start the monster timer
     }
@@ -62,29 +62,44 @@ public class View extends JFrame{
         jTextArea2.setBackground(Color.BLACK);
         jTextArea2.setEditable(false);
 
-        jTextArea2.setColumns(9);
-        jTextArea2.setRows(9);
-        jTextArea2.setFont(new Font("Courier New", 1,15 ));
-        jTextArea2.setForeground(Color.WHITE);
-        jTextArea2.setBackground(Color.BLACK);
-        jTextArea2.setEditable(false);
+        jTextArea3.setColumns(9);
+        jTextArea3.setRows(9);
+        jTextArea3.setFont(new Font("Courier New", 1, 15));
+        jTextArea3.setForeground(Color.WHITE);
+        jTextArea3.setBackground(Color.BLACK);
+        jTextArea3.setEditable(false);
 
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
-                        .addComponent(jScrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 725, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextArea2, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 725, GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jTextArea3, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 725, GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 725, Short.MAX_VALUE)
+                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(jTextArea3, GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                                        .addComponent(jTextArea2, GroupLayout.DEFAULT_SIZE, 650, Short.MAX_VALUE)
+                                )
+                                .addContainerGap()
+                        )
         );
         layout.setVerticalGroup(
                 layout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(layout.createSequentialGroup()
-                                .addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 418, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextArea2, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jTextArea3, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
+                                .addContainerGap()
+                                .addGroup(layout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                                        .addComponent(jScrollPane1, GroupLayout.DEFAULT_SIZE, 418, Short.MAX_VALUE)
+                                        .addGroup(layout.createSequentialGroup()
+                                                .addComponent(jTextArea3, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(jTextArea2, GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                        )
+                                )
+                                .addContainerGap()
+                        )
         );
+
 
         pack();
     }
@@ -140,7 +155,9 @@ public class View extends JFrame{
     public Items getSelectedItems() {
         return selectedItem;
     }
-
+    public void setSelectedItem(Items selectedItem) {
+        this.selectedItem = selectedItem;
+    }
 
 
 
@@ -166,10 +183,9 @@ public class View extends JFrame{
 
     }
 
-
-    public void JTextArea3(String message) {
-        jTextArea3.setText(message);
-
+    public void showMessage2(String Message){
+        jTextArea3.setText("Player -- HP : " + map.getPlayer().getHp());
+        jTextArea3.append(Message);
     }
 
     private void jTextArea1KeyPressed(KeyEvent evt) {
