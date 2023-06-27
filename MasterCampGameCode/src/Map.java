@@ -51,6 +51,7 @@ public class Map {
     // initialisation de la map et la position du joueur
     private void init() {
         int y = 0;
+        monster = new Monster(100, 1, 30, "monstre");
         //Parcourt chaque ligne et chaque charactère de la room
         for (int i = 0; i < room1.length; i++) {
             for (int x = 0; x < room1[i].length; x++) {
@@ -124,7 +125,7 @@ public class Map {
         if(player.getPosition().x == monster.getPosition().x && player.getPosition().y == monster.getPosition().y && monster.getHp() > 0){
             view.showMessage("Vous avez rencontré un monstre, choisissez une arme pour l'attaquer" + "\nMonstre : HP " + monster.getHp() + " Damage " + monster.getDamage());
 
-            //if(view.getSelectedItems() != null) {
+            if(view.getSelectedItems() != null) {
                 if (view.getSelectedItems().getValue() < monster.getHp() && !view.getSelectedItems().getType()) {
                     monster.setHp(monster.getHp() - view.getSelectedItems().getValue());
                     player.setHp(player.getHp() - monster.getDamage());
@@ -151,11 +152,11 @@ public class Map {
                     view.showMessage("Vous avez tué le monstre");
                     monster.setHp(0);
                 }
-            /*}else{
+            }else{
                 player.setHp(player.getHp() - monster.getDamage());
                 System.out.println("Monster" + monster.getHp());
                 System.out.println("Player" + player.getHp());
-            }*/
+            }
         }
 
     }

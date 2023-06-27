@@ -147,9 +147,8 @@ public class View extends JFrame{
             selectedItem = inventoryItems.get(choice - 1);
             inventoryItems.remove(choice - 1);
             updateInventory();
-            paused = false;
         }
-
+        paused = false;
     }
 
     public Items getSelectedItems() {
