@@ -80,11 +80,7 @@ public class Map {
         int[] deplacements = player.move(direction);
         int dx = deplacements[0];
         int dy = deplacements[1];
-
-        if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '0' )
-        {
-            map[0][player.getPosition().x + dx][player.getPosition().y + dy] = ' ';
-        }
+        
 
         if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '*')
         {
@@ -131,9 +127,7 @@ public class Map {
                     player.setHp(player.getHp() - monster.getDamage());
                     view.setSelectedItem(null);
 
-                    System.out.println("Monster" + monster.getHp());
 
-                    System.out.println("Player" + player.getHp());
 
                     if (player.getHp() <= 0) {
                         view.showMessage("Vous êtes mort");
@@ -154,8 +148,6 @@ public class Map {
                 }
             }else{
                 player.setHp(player.getHp() - monster.getDamage());
-                System.out.println("Monster" + monster.getHp());
-                System.out.println("Player" + player.getHp());
             }
         }
 
