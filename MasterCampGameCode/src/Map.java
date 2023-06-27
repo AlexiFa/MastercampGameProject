@@ -122,7 +122,7 @@ public class Map {
         }
 
         if(player.getPosition().x == monster.getPosition().x && player.getPosition().y == monster.getPosition().y && monster.getHp() > 0){
-            view.showMessage("Vous avez rencontré un monstre, choisissez une arme pour l'attaquer" + "\nMonstre : HP " + monster.getHp() + " Damage " + monster.getDamage());
+            view.showMessage("Vous avez rencontré un monstre, choisissez une arme pour l'attaquer" );
 
             //if(view.getSelectedItems() != null) {
                 if (view.getSelectedItems().getValue() < monster.getHp() && !view.getSelectedItems().getType()) {
@@ -163,7 +163,7 @@ public class Map {
 
     public void moveMonster(int direction){
 
-        view.showMessage2("\nMonstre -- HP : " + monster.getHp());
+        view.showMessage2("\nMonstre -- HP : " + monster.getHp() + " -- Dégâts : " + monster.getDamage());
 
         if (monster.getHp() > 0) {
             int[] deplacements = monster.move(direction);
