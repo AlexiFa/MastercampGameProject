@@ -7,13 +7,19 @@ public class Pause extends JFrame{
     private JTextArea jTextArea1;
     private int selected;
     private ArrayList<String> options = new ArrayList<String>();
+    private String titre = "######     #    #     #  ###### #######\n"
+                        + "#     #   # #   #     # #       #      \n"
+                        + "#     #  #   #  #     #  ###### #####  \n"
+                        + "######  #     # #     #       # #      \n"
+                        + "#       ####### #     #       # #      \n"
+                        + "#       #     #  #####   ###### #######\n";
 
     public Pause(){
         initComponents();
         setTitle("Pause");
         setLocationRelativeTo(null);
-        //options.add("[Resume]");
-        options.add("[Restart]");
+        options.add("[Resume]");
+        // options.add("Restart");
         options.add("Quit");
         selected = 0;
         setText();
@@ -40,10 +46,10 @@ public class Pause extends JFrame{
         GroupLayout layout = new GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(jScrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 725, GroupLayout.PREFERRED_SIZE)
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING).addComponent(jScrollPane1, GroupLayout.Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 360, GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
-                layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 500, GroupLayout.PREFERRED_SIZE).addGap(0, 0, Short.MAX_VALUE))
+                layout.createParallelGroup(GroupLayout.Alignment.LEADING).addGroup(layout.createSequentialGroup().addComponent(jScrollPane1, GroupLayout.PREFERRED_SIZE, 210, GroupLayout.PREFERRED_SIZE).addGap(0, 0, Short.MAX_VALUE))
         );
         pack();
     }
@@ -68,12 +74,12 @@ public class Pause extends JFrame{
                 switch (selected) {
                     case 0:
                         this.dispose();
-                        new View().setVisible(true); // todo : faire marcher le load pour reprendre la partie
+                        View.paused = false; // todo : faire marcher le load pour reprendre la partie
                         break;
-                    case 2:
+                    /*case 1:
                         this.dispose();
                         new View().setVisible(true);
-                        break;
+                        break;*/
                     case 1:
                         System.exit(0);
                         break;
@@ -90,9 +96,11 @@ public class Pause extends JFrame{
         options.set(selected, "[" + options.get(selected) + "]");
     }
     public void setText(){
-        jTextArea1.setText("");
+        jTextArea1.setText(titre);
+        jTextArea1.append("");
         for (String s : options) {
-            jTextArea1.append(s + "\n");
+            jTextArea1.append("\n");
+            jTextArea1.append("\t\t" + s + "\n");
         }
     }
 }

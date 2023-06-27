@@ -58,8 +58,8 @@ public class MapGenerator {
         int itemCounter = 0;
         for (int i = 0; i < 20; i++) {
 
-            if (itemCounter < 5) {
-                if (Math.random() < 0.5) {
+            if (itemCounter < 7) {
+                if (itemCounter < 3) {
                     this.map[(int) (Math.random() * (x - 4)) + 2][(int) (Math.random() * (y - 4)) + 2] = '*';
                     itemCounter++; // Incrémenter le compteur d'éléments
                 } else {

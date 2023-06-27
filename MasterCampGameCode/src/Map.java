@@ -123,7 +123,7 @@ public class Map {
                  player.setPosition(new Point(tempx, tempy));
         }
 
-        if(player.getPosition().x == monster.getPosition().x && player.getPosition().y == monster.getPosition().y){
+        if(player.getPosition().x == monster.getPosition().x && player.getPosition().y == monster.getPosition().y && monster.getHp() > 0){
             view.showMessage("Vous avez rencontré un monstre, choisissez une arme pour l'attaquer" + "\nMonstre : HP " + monster.getHp() + " Damage " + monster.getDamage());
 
 
@@ -151,6 +151,7 @@ public class Map {
 
             } else if (view.getSelectedItems().getValue() >= monster.getHp()) {
                 view.showMessage("Vous avez tué le monstre");
+                monster.setHp(0);
             }
         }
 
@@ -187,7 +188,7 @@ public class Map {
                 {
                     out += ('H');
                 }
-                else if(monster.getPosition().x == x && monster.getPosition().y == y)
+                else if(monster.getPosition().x == x && monster.getPosition().y == y && monster.getHp() > 0)
                 {
                     out += ('M');
                 }
@@ -213,24 +214,6 @@ public class Map {
 
 
 
-    public static void main(String[] args)
-    {
-        View view = new View();
-        Map map = new Map(view);
-
-        System.out.println(map.toString());
-        Scanner sc = new Scanner(System.in);
-
-
-
-        while (true) {
-            int direction = sc.nextInt();
-            map.move(direction);
-            System.out.println(map.toString());
-        }
-
-
-    }
 
     public void setPlayer(Player player) {
         this.player = player;

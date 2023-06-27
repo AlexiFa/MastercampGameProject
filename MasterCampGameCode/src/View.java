@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.util.List;
 
 public class View extends JFrame{
+    static boolean paused = false;
     static ArrayList<Items> attackItemList = new ArrayList<Items>();
     static ArrayList<Items> healItemList = new ArrayList<Items>();
     static ArrayList<Monster> monsterList = new ArrayList<Monster>();
@@ -125,12 +126,13 @@ public class View extends JFrame{
         }
 
         jTextArea2.setText(inventoryText.toString());
-
+        paused = true;
         int choice = askForChoice("Choisissez un élément de votre inventaire : " + "\n Entrez 0 pour quitter.", inventoryItems);
         if (choice >= 1 && choice <= inventoryItems.size()) {
             selectedItem = inventoryItems.get(choice - 1);
             inventoryItems.remove(choice - 1);
             updateInventory();
+            paused = false;
         }
 
     }
@@ -181,8 +183,9 @@ public class View extends JFrame{
         else if(keyCode == KeyEvent.VK_ESCAPE){
             Pause pause = new Pause();
             Save.savefile(map);
+            paused = true;
             pause.setVisible(true);
-            this.dispose();
+            // this.dispose();
         }// si la touche s est appuyée
         else if(evt.getKeyCode() == 83){
             Save.savefile(map);
@@ -200,7 +203,7 @@ public class View extends JFrame{
 
     }
 
-
+/*
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {
@@ -208,7 +211,7 @@ public class View extends JFrame{
                 new View().setVisible(true);
             }
         });
-    }
+    }*/
 
     private void startMonsterTimer(){
         java.util.Timer timer = new java.util.Timer();
@@ -218,8 +221,10 @@ public class View extends JFrame{
             public void run() {
                 Random rand = new Random();
                 int n = rand.nextInt(4);
-                map.moveMonster(n);
-                jTextArea1.setText(map.toString());
+                if(!paused) {
+                    map.moveMonster(n);
+                    jTextArea1.setText(map.toString());
+                }
             }
         }, delay, delay);
     }
