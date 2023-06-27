@@ -188,6 +188,10 @@ public class View extends JFrame{
         // si une des fleches est appuyée
         if(keyCode == KeyEvent.VK_DOWN || keyCode == KeyEvent.VK_UP || keyCode == KeyEvent.VK_LEFT || keyCode == KeyEvent.VK_RIGHT){
             map.move(evt.getKeyCode());
+            if(map.getPlayer().getHp() <= 0) {
+                JOptionPane.showMessageDialog(null, "Vous avez perdu !", "Game Over", JOptionPane.INFORMATION_MESSAGE);
+                System.exit(0);
+            }
             jTextArea1.setText(map.toString());
         }
         // la touche echap est appuyée
