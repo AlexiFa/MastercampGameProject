@@ -80,7 +80,6 @@ public class Map {
         int[] deplacements = player.move(direction);
         int dx = deplacements[0];
         int dy = deplacements[1];
-        
 
         if (map[0][player.getPosition().x + dx][player.getPosition().y + dy] == '*')
         {
@@ -126,7 +125,6 @@ public class Map {
                     monster.setHp(monster.getHp() - view.getSelectedItems().getValue());
                     player.setHp(player.getHp() - monster.getDamage());
                     view.setSelectedItem(null);
-
 
 
                     if (player.getHp() <= 0) {

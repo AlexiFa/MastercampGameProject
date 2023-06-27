@@ -23,9 +23,7 @@ public class View extends JFrame{
         setLocationRelativeTo(null);
         jTextArea1.setText(map.toString());
         updateInventory();
-
         jTextArea3.setText("Player -- HP : " + map.getPlayer().getHp() + "\nMonstre -- HP : " + map.getMonster().getHp() + " -- Dégâts : " + map.getMonster().getDamage());
-
         startMonsterTimer(); // Start the monster timer
     }
 
@@ -158,8 +156,6 @@ public class View extends JFrame{
         this.selectedItem = selectedItem;
     }
 
-
-
      private int askForChoice(String message, List<Items> options) {
         String input = JOptionPane.showInputDialog(this, message);
 
@@ -214,7 +210,22 @@ public class View extends JFrame{
             jTextArea1.setText(map.toString());
         }
 
+        else if(keyCode == KeyEvent.VK_P){
+            List<Items> inventoryItems = inventory.getItems();
+            for (int i = 0; i < inventoryItems.size(); i++) {
+                Items item = inventoryItems.get(i);
+                if(item.getName().equals("Potion")){
+                    map.getPlayer().setHp(map.getPlayer().getHp() + item.getValue());
+                    if(map.getPlayer().getHp() > 100){
+                        map.getPlayer().setHp(100);
+                    }
+                    inventoryItems.remove(i);
+                    updateInventory();
+                    break;
+                }
+            }
 
+        }
 
     }
 
@@ -245,8 +256,6 @@ public class View extends JFrame{
     }
 
 
-
-
     private void updateInventory() {
         StringBuilder inventoryText = new StringBuilder();
         inventoryText.append("Inventory:\n");
@@ -262,7 +271,6 @@ public class View extends JFrame{
                 inventoryText.append("-\n");
             }
         }
-
         jTextArea2.setText(inventoryText.toString());
     }
 
