@@ -131,7 +131,7 @@ public class Map {
                     view.setSelectedItem(null);
 
                     System.out.println("Monster" + monster.getHp());
-                    
+
                     System.out.println("Player" + player.getHp());
 
                     if (player.getHp() <= 0) {
