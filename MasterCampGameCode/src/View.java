@@ -24,7 +24,7 @@ public class View extends JFrame{
         jTextArea1.setText(map.toString());
         updateInventory();
 
-        jTextArea3.setText("Player -- HP : " + map.getPlayer().getHp() + "\nMonster -- HP : " + map.getMonster().getHp());
+        jTextArea3.setText("Player -- HP : " + map.getPlayer().getHp() + "\nMonstre -- HP : " + map.getMonster().getHp() + " -- Dégâts : " + map.getMonster().getDamage());
 
         startMonsterTimer(); // Start the monster timer
     }
