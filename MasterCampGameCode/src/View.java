@@ -10,7 +10,7 @@ public class View extends JFrame{
     static ArrayList<Items> healItemList = new ArrayList<Items>();
     static ArrayList<Monster> monsterList = new ArrayList<Monster>();
     private Map map = new Map(View.this);
-    private Inventory inventory = new Inventory(5, 5, 5);
+    private final Inventory inventory = new Inventory(5, 5, 5);
     private JScrollPane jScrollPane1;
     private JTextArea jTextArea1;
     private Items selectedItem;
@@ -23,7 +23,7 @@ public class View extends JFrame{
         setLocationRelativeTo(null);
         jTextArea1.setText(map.toString());
         updateInventory();
-        jTextArea3.setText("Player -- HP : " + map.getPlayer().getHp() + "\nMonstre -- HP : " + map.getMonster().getHp() + " -- Dégâts : " + map.getMonster().getDamage());
+        jTextArea3.setText("Player -- HP : " + map.getPlayer().getHp() + "\nMonstre -- HP : " + map.getMonster().getHp() + " -- Degats : " + map.getMonster().getDamage());
         startMonsterTimer(); // Start the monster timer
     }
 
@@ -115,7 +115,6 @@ public class View extends JFrame{
             boolean added = inventory.addItem(map.getItem());
             if (added) {
                 updateInventory(); // Mettre à jour l'affichage de l'inventaire
-                jTextArea1.setText(map.toString());
             } else {
                 JOptionPane.showMessageDialog(this, "L'inventaire est plein.", "Inventaire plein", JOptionPane.ERROR_MESSAGE);
             }
@@ -140,6 +139,7 @@ public class View extends JFrame{
 
         jTextArea2.setText(inventoryText.toString());
         paused = true;
+
         int choice = askForChoice("Choisissez un élément de votre inventaire : " + "\n Entrez 0 pour quitter.", inventoryItems);
         if (choice >= 1 && choice <= inventoryItems.size()) {
             selectedItem = inventoryItems.get(choice - 1);
@@ -205,7 +205,7 @@ public class View extends JFrame{
         else if(evt.getKeyCode() == 83){
             Save.savefile(map);
         } else if(evt.getKeyCode() == 76){
-            map = Save.fetchSaveFile();
+            //map = Save.fetchSaveFile();
             jTextArea1.setText(map.toString());
         }
 
@@ -262,7 +262,7 @@ public class View extends JFrame{
 
     private void updateInventory() {
         StringBuilder inventoryText = new StringBuilder();
-        inventoryText.append("Inventory:\n");
+        inventoryText.append("Inventaire:\n");
 
 
         int itemCount = Math.min(inventory.getCapacity(), inventory.getRows() * inventory.getCols());

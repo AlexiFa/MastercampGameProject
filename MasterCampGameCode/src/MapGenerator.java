@@ -9,6 +9,7 @@ public class MapGenerator {
         int y = 80;
         this.sizeX = x;
         this.sizeY = y;
+
         // create map borders
         this.map = new char[x][y];
         for (int i = 0; i < x; i++) {
@@ -94,23 +95,15 @@ public class MapGenerator {
                 if (refVWallX + j < x - 1)
                     this.map[refVWallX + j][refVWallY] = '#';
             }
-            this.map[2][2] = 'H';
-            this.map[x - 3][y - 3] = '>';
         }
+        this.map[2][2] = 'H';
+        this.map[x - 3][y - 3] = '>';
         Random random = new Random();
         int xM = random.nextInt(20) + 1;
         int yM = random.nextInt(78) + 1;
         this.map[xM][yM] = 'M';
     }
 
-    public void printMap(){
-        for (int i = 0; i < this.sizeX; i++) {
-            for (int j = 0; j < this.sizeY; j++) {
-                System.out.print(this.map[i][j]);
-            }
-            System.out.println();
-        }
-    }
 
     public int getSizeX() {
         return sizeX;

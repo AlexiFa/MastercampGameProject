@@ -1,9 +1,9 @@
 import java.util.ArrayList;
 import java.util.List;
 public class Inventory {
-    private int rows;
-    private int cols;
-    private int capacity;
+    private final int rows;
+    private final int cols;
+    private final int capacity;
     private List<Items> items;
 
     public Inventory(int rows, int cols, int capacity) {
@@ -11,7 +11,6 @@ public class Inventory {
         this.cols = cols;
         this.capacity = capacity;
         this.items = new ArrayList<>();
-
     }
 
     public int getRows() {
@@ -26,7 +25,8 @@ public class Inventory {
         return capacity;
     }
 
-    public Items getItem(int index) {
+    public Items getItem(int index)
+    {
         if (index >= 0 && index < items.size()) {
             return items.get(index);
         }
@@ -37,6 +37,9 @@ public class Inventory {
     public List<Items> getItems() {
         return items;
     }
+
+
+
     public boolean addItem(Items item) {
         if (items.size() < capacity) {
             items.add(item);

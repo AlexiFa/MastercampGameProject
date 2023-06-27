@@ -2,7 +2,6 @@
 import javax.swing.*;
 import java.awt.Point;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.Random;
 
 public class Map {
@@ -31,13 +30,12 @@ public class Map {
         potion.add(new Items(rand.nextInt(50 - 10 + 1) + 10, "Potion", true));
         potion.add(new Items(rand.nextInt(50 - 10 + 1) + 10, "Potion", true));
 
-        monster = new Monster(100, 1, 30, "monstre");
-
         m1 = new MapGenerator();
         room1 = m1.getMap();
         map = new char[2][m1.getSizeY()][m1.getSizeX()];
         init();
     }
+
 
     public Map(char[][] room){
         room1 = room;
@@ -56,6 +54,8 @@ public class Map {
         for (int i = 0; i < room1.length; i++) {
             for (int x = 0; x < room1[i].length; x++) {
                 char charactere = room1[i][x];
+                // map[0] = char immobile (mur, porte, items)
+                // map[1] = char mobile (joueur, monstre)
                 map[charactere / 70][x][y] = charactere;
                 map[1 - charactere / 70][x][y] = ' ';
                 //determine la position du joueur
@@ -120,19 +120,13 @@ public class Map {
         if(player.getPosition().x == monster.getPosition().x && player.getPosition().y == monster.getPosition().y && monster.getHp() > 0){
             view.showMessage("Vous avez rencontré un monstre, choisissez une arme pour l'attaquer" );
 
-            if(view.getSelectedItems() != null) {
+            if(view.getSelectedItems() != null)
+            {
                 if (view.getSelectedItems().getValue() < monster.getHp() && !view.getSelectedItems().getType()) {
                     monster.setHp(monster.getHp() - view.getSelectedItems().getValue());
                     player.setHp(player.getHp() - monster.getDamage());
                     view.setSelectedItem(null);
 
-
-                    if (player.getHp() <= 0) {
-                        view.showMessage("Vous êtes mort");
-                        System.exit(0);
-                    } else if (monster.getHp() <= 0) {
-                        view.showMessage("Vous avez tué le monstre");
-                    }
 
                 } else if (view.getSelectedItems().getValue() < monster.getHp() && view.getSelectedItems().getType()) {
                     player.setHp(player.getHp() + view.getSelectedItems().getValue());
@@ -144,7 +138,9 @@ public class Map {
                     view.showMessage("Vous avez tué le monstre");
                     monster.setHp(0);
                 }
-            }else{
+            }
+            else
+            {
                 player.setHp(player.getHp() - monster.getDamage());
             }
         }
@@ -154,7 +150,7 @@ public class Map {
 
     public void moveMonster(int direction){
 
-        view.showMessage2("\nMonstre -- HP : " + monster.getHp() + " -- Dégâts : " + monster.getDamage());
+        view.showMessage2("\nMonstre -- HP : " + monster.getHp() + " -- Degats : " + monster.getDamage());
 
         if (monster.getHp() > 0) {
             int[] deplacements = monster.move(direction);
@@ -193,12 +189,6 @@ public class Map {
                 {
                     out += map[1][x][y];
                 }
-                else if (map[1][x][y] == 'O')
-                {
-                    out += ' ';
-                    map[1][x][y] = ' ';
-                }
-
                 else
                 {
                     out += map[0][x][y];

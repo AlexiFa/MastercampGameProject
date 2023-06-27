@@ -21,7 +21,7 @@ public class Pause extends JFrame{
         options.add("[Resume]");
         // options.add("Restart");
         options.add("Quit");
-        selected = 0;
+
         setText();
         selected = 0;
     }
@@ -74,12 +74,8 @@ public class Pause extends JFrame{
                 switch (selected) {
                     case 0:
                         this.dispose();
-                        View.paused = false; // todo : faire marcher le load pour reprendre la partie
+                        View.paused = false;
                         break;
-                    /*case 1:
-                        this.dispose();
-                        new View().setVisible(true);
-                        break;*/
                     case 1:
                         System.exit(0);
                         break;

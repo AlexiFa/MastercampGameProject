@@ -21,15 +21,6 @@ public class Items {
         return this.type;
     }
 
-    public void setValue(int value){
-        this.value = value;
-    }
-    public void setName(String name){
-        this.name = name;
-    }
-    public void setType(boolean type){
-        this.type = type;
-    }
 
     @Override
     public String toString(){
