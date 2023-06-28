@@ -104,24 +104,20 @@ public class MapGenerator {
         this.map[xM][yM] = 'M';
     }
 
-
+    // getters et setters
     public int getSizeX() {
         return sizeX;
     }
-
     public int getSizeY() {
         return sizeY;
     }
-
     public char[][] getMap() {
         return map;
     }
-
     public void setSize() {
         this.sizeX = map.length;
         this.sizeY = map[0].length;
     }
-
     public void setMap(char[][] map) {
         this.map = map;
     }

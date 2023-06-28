@@ -36,7 +36,7 @@ public class Map {
         init();
     }
 
-
+    // pour init un obj map avec une room deja definie (créée pour le load qui ne marche pas encore)
     public Map(char[][] room){
         room1 = room;
         m1 = new MapGenerator();
@@ -147,7 +147,8 @@ public class Map {
 
     }
 
-
+    // move du monstre
+    // appelé toute les 0.5 secondes dans la view
     public void moveMonster(int direction){
 
         view.showMessage2("\nMonstre -- HP : " + monster.getHp() + " -- Degats : " + monster.getDamage());
@@ -163,10 +164,6 @@ public class Map {
                 monster.setPosition(new Point(tempx, tempy));
             }
         }
-    }
-
-    public Items getItem() {
-        return item;
     }
 
     @Override
@@ -199,9 +196,7 @@ public class Map {
         return out;
     }
 
-
-
-
+    // getters et setters
     public void setPlayer(Player player) {
         this.player = player;
     }
@@ -228,5 +223,8 @@ public class Map {
     }
     public void addPotion(Items potion) {
         this.potion.add(potion);
+    }
+    public Items getItem() {
+        return item;
     }
 }

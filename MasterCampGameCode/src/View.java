@@ -97,11 +97,10 @@ public class View extends JFrame{
                                 .addContainerGap()
                         )
         );
-
-
         pack();
     }
 
+    // message quand on passe sur un item
     public void showMessageBox(String message) {
         UIManager.put("OptionPane.background", Color.WHITE);
         UIManager.put("OptionPane.messageForeground", Color.BLACK);
@@ -122,8 +121,7 @@ public class View extends JFrame{
 
     }
 
-
-
+    // quand on rencontre un monstre et qu'on doit choisir un item pour attaquer ou se soigner
     public void showMessage(String message) {
         jTextArea2.setText(message );
         StringBuilder inventoryText = new StringBuilder();
@@ -139,7 +137,7 @@ public class View extends JFrame{
 
         jTextArea2.setText(inventoryText.toString());
         paused = true;
-
+        // pop up qui demande l'input de l'item sectionné
         int choice = askForChoice("Choisissez un élément de votre inventaire : " + "\n Entrez 0 pour quitter.", inventoryItems);
         if (choice >= 1 && choice <= inventoryItems.size()) {
             selectedItem = inventoryItems.get(choice - 1);
@@ -149,13 +147,7 @@ public class View extends JFrame{
         paused = false;
     }
 
-    public Items getSelectedItems() {
-        return selectedItem;
-    }
-    public void setSelectedItem(Items selectedItem) {
-        this.selectedItem = selectedItem;
-    }
-
+    // pop up qui demande l'item à utiliser
      private int askForChoice(String message, List<Items> options) {
         String input = JOptionPane.showInputDialog(this, message);
 
@@ -174,15 +166,15 @@ public class View extends JFrame{
             showMessage("Choix invalide. Veuillez réessayer.");
             return askForChoice(message, options);
         }
-
-
     }
 
+    // afficher les HP du joueur et du monstre en permanence
     public void showMessage2(String Message){
         jTextArea3.setText("Player -- HP : " + map.getPlayer().getHp());
         jTextArea3.append(Message);
     }
 
+    // gestion des input au clavier
     private void jTextArea1KeyPressed(KeyEvent evt) {
         int keyCode = evt.getKeyCode();
         // si une des fleches est appuyée
@@ -204,16 +196,16 @@ public class View extends JFrame{
         }// si la touche s est appuyée
         else if(evt.getKeyCode() == 83){
             Save.savefile(map);
-        } else if(evt.getKeyCode() == 76){
+        } else if(evt.getKeyCode() == 76){ // touche L mais ça ne marche pas
             //map = Save.fetchSaveFile();
             jTextArea1.setText(map.toString());
         }
-
+        // touche R pour restart
         else if(keyCode == KeyEvent.VK_R){
             map = new Map(View.this);
             jTextArea1.setText(map.toString());
         }
-
+        // touche P pour utiliser une potion
         else if(keyCode == KeyEvent.VK_P){
             List<Items> inventoryItems = inventory.getItems();
             for (int i = 0; i < inventoryItems.size(); i++) {
@@ -228,11 +220,8 @@ public class View extends JFrame{
                     break;
                 }
             }
-
         }
-
     }
-
 /*
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
@@ -243,6 +232,7 @@ public class View extends JFrame{
         });
     }*/
 
+    // function qui appele le mouvement du monstre tout les 500 ms
     private void startMonsterTimer(){
         java.util.Timer timer = new java.util.Timer();
         int delay = 500; // milliseconds
@@ -251,7 +241,7 @@ public class View extends JFrame{
             public void run() {
                 Random rand = new Random();
                 int n = rand.nextInt(4);
-                if(!paused) {
+                if(!paused) { // si le jeu est en pause, les monstre ne bougent plus (c'est la seul entité NPC qui est pas immobile)
                     map.moveMonster(n);
                     jTextArea1.setText(map.toString());
                 }
@@ -259,7 +249,7 @@ public class View extends JFrame{
         }, delay, delay);
     }
 
-
+    // affichage de l'inventaire en permanence
     private void updateInventory() {
         StringBuilder inventoryText = new StringBuilder();
         inventoryText.append("Inventaire:\n");
@@ -278,5 +268,11 @@ public class View extends JFrame{
         jTextArea2.setText(inventoryText.toString());
     }
 
-
+    // getters et setters
+    public Items getSelectedItems() {
+        return selectedItem;
+    }
+    public void setSelectedItem(Items selectedItem) {
+        this.selectedItem = selectedItem;
+    }
 }
